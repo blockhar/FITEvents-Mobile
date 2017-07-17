@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>abc981c3-447e-49ee-9dea-c4376d0d8b16</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>FITEvents</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Team.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\TeamInvitation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExecutionPages\executionDayView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExecutionPages\executionTaskView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Deliverable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Event.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Globals.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Phase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Task.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\TeamMember.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HomePages\EventHome.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HomePages\Home.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HomePages\Login.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemPages\DeliverableDetails.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemPages\EventDetails.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemPages\InvitationDetails.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemPages\PhaseDetail.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemPages\TaskDetails.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemPages\TeamDetails.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemPages\UserDetails.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ListPages\listDeliverables.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ListPages\listEvents.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ListPages\listInvitations.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ListPages\listPhases.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ListPages\listTasks.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ListPages\listTeamMembers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ListPages\listTeams.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Modal Pages\ModalEventMembers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modal Pages\ModalTeam.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modal Pages\ModalTeamMemberTask.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
