@@ -90,9 +90,9 @@ namespace FITEvents.ItemPages
 
         }
 
-        void OnbtnDeliverablesClick(object sender, EventArgs e)
+        async void OnbtnDeliverablesClick(object sender, EventArgs e)
         {
-            List<Deliverable> allDeliverables = Deliverable.GetAllDeliverables(phase.phaseID);
+            List<Deliverable> allDeliverables = await Deliverable.GetAllDeliverables(phase.phaseID);
             Navigation.PushModalAsync(new listDeliverables(allDeliverables, phase));
         }
     }

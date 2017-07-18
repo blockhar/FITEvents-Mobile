@@ -69,7 +69,7 @@ namespace FITEvents.ItemPages
             };
         }
 
-        void Save(object sender, EventArgs e)
+        async void Save(object sender, EventArgs e)
         {
             myEvent.eventName = enteventName.Text;
             myEvent.eventLocation = enteventLocation.Text;
@@ -78,7 +78,7 @@ namespace FITEvents.ItemPages
             if (String.IsNullOrEmpty(myEvent.eventID))
             {
                 Log.Info("FITEVENTS","Creating Event");
-                myEvent = myEvent.Create();
+                myEvent = await myEvent.Create();
                 Navigation.PushModalAsync(new listPhases(new List<Phase>(), myEvent));
             }
             else

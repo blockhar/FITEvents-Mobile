@@ -82,7 +82,7 @@ namespace FITEvents.ItemPages
             };
         }
 
-        void Save(object sender, EventArgs e)
+        async void Save(object sender, EventArgs e)
         {
             deliverable.deliverableName = entdeliverableName.Text;
             deliverable.vendorID = entvendorName.Text;
@@ -91,8 +91,8 @@ namespace FITEvents.ItemPages
 
             if (String.IsNullOrEmpty(deliverable.deliverableID))
             {
-                deliverable = deliverable.Create();
-                Navigation.PushModalAsync(new listTasks(new List<Task>(), deliverable));
+                deliverable = await deliverable.Create();
+                await Navigation.PushModalAsync(new listTasks(new List<Task>(), deliverable));
             }
 
             else

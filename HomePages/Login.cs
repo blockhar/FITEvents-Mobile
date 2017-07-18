@@ -80,7 +80,7 @@ namespace FITEvents.HomePages
             };
         }
 
-        async System.Threading.Tasks.Task OnSignupBtnClick(object sender, EventArgs args)
+        async void OnSignupBtnClick(object sender, EventArgs args)
         {
             string username = entUsername.Text.ToLower();
             string password = entPassword.Text;

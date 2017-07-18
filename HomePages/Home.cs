@@ -59,9 +59,9 @@ namespace FITEvents.HomePages
             Navigation.PushModalAsync(new UserDetails(Globals.loggedInUser));
         }
 
-        void OnEventsBtnClick(object sender, EventArgs e)
+        async void OnEventsBtnClick(object sender, EventArgs e)
         {
-            List<Event> allEvents = Event.GetAllEvents();
+            List<Event> allEvents = await Event.GetAllEvents();
             Navigation.PushModalAsync(new listEvents(allEvents));
         }
 

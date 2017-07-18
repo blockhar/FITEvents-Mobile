@@ -5,6 +5,7 @@ using RestSharp;
 using Newtonsoft.Json;
 using Android.Util;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace FITEvents.Classes
 {
@@ -30,7 +31,7 @@ namespace FITEvents.Classes
             eventAdmin = _eventAdmin;
         }
 
-        public void Save()
+        public async void Save()
         {
             var client = Globals.client;
             var request = new RestRequest("api/event", Method.PUT);
@@ -40,12 +41,12 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             //response.StatusCode
         }
 
-        public Event Create()
+        public async Task<Event> Create()
         {
             var client = Globals.client;
             var request = new RestRequest("api/event", Method.POST);
@@ -55,13 +56,13 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
             Event myEvent = JsonConvert.DeserializeObject<Event>(response.Content);
             return myEvent;
 
             //response.StatusCode
         }
-        static public Event GetEvent(string eventID)
+        static public async Task<Event> GetEvent(string eventID)
         {
             var client = Globals.client;
             var request = new RestRequest("api/event/" + eventID, Method.GET);
@@ -69,7 +70,7 @@ namespace FITEvents.Classes
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             Event myevent = JsonConvert.DeserializeObject<Event>(response.Content);
 
@@ -77,7 +78,7 @@ namespace FITEvents.Classes
         }
 
 
-        static public List<Event> GetAllEvents()
+        static public async Task<List<Event>> GetAllEvents()
         {
             List<Event> resultsAsList = new List<Event>();
 
@@ -87,7 +88,7 @@ namespace FITEvents.Classes
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
             Log.Info("FITEVENTS", "Got my all events response. It is " + response.Content);
 
             if ((int)response.StatusCode == 200)
@@ -107,7 +108,7 @@ namespace FITEvents.Classes
 
         }
 
-        public void Delete()
+        public async void Delete()
         {
             var client = Globals.client;
             var request = new RestRequest("api/event", Method.DELETE);
@@ -117,7 +118,7 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             //response.StatusCode
         }
