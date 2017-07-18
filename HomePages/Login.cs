@@ -24,10 +24,8 @@ namespace FITEvents.HomePages
         Entry entUsername;
         Label lblPassword;
         Entry entPassword;
-        Label lblResponse;
         Button btnLogin;
         Button btnSignup;
-        Button btntest;
 
         public Login()
         {
@@ -64,16 +62,6 @@ namespace FITEvents.HomePages
             };
             btnSignup.Clicked += OnSignupBtnClick;
 
-            lblResponse = new Xamarin.Forms.Label
-            {
-                Text = "Response Here"
-            };
-
-            btntest = new Xamarin.Forms.Button
-            {
-                Text = "Do Test"
-            };
-            btntest.Clicked += OnTestBtnClick;
 
             this.Content = new StackLayout
             {
@@ -83,18 +71,9 @@ namespace FITEvents.HomePages
                     lblPassword,
                     entPassword,
                     btnLogin,
-                    btnSignup,
-                    lblResponse,
-                    btntest
+                    btnSignup
                 }
             };
-        }
-
-        void OnTestBtnClick(object sender, EventArgs e)
-        {
-            
-            Navigation.PushModalAsync(new executionDayView());
-
         }
 
         void OnSignupBtnClick(object sender, EventArgs args)
@@ -183,7 +162,6 @@ namespace FITEvents.HomePages
 
             else
             {
-                lblResponse.Text = "ERROR " + response.Content.ToString();
                 DisplayAlert("Error", "Error. Http Status: " + response.StatusCode + ". Error Message: " + response.Content, "OK");
                 return false;
             }
