@@ -1,0 +1,1 @@
+Update-Package -ProjectName App5.Android -reinstall
