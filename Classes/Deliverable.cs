@@ -40,7 +40,7 @@ namespace FITEvents.Classes
             notes = _notes;
         }
 
-        public void Save()
+        public async void Save()
         {
             var client = Globals.client;
             var request = new RestRequest("api/deliverable", Method.PUT);
@@ -50,12 +50,12 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             //response.StatusCode
         }
 
-        public Deliverable Create()
+        public async Task<Deliverable> Create()
         {
             var client = Globals.client;
             var request = new RestRequest("api/deliverable", Method.POST);
@@ -65,13 +65,13 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             Deliverable deliverable = JsonConvert.DeserializeObject<Deliverable>(response.Content);
             return deliverable;
             //response.StatusCode
         }
-        static public Deliverable GetDeliverable(string deliverableID)
+        static public async Task<Deliverable> GetDeliverable(string deliverableID)
         {
             var client = Globals.client;
             var request = new RestRequest("api/deliverable/" + deliverableID, Method.GET);
@@ -79,14 +79,14 @@ namespace FITEvents.Classes
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             Deliverable deliverable = JsonConvert.DeserializeObject<Deliverable>(response.Content);
 
             return deliverable;
         }
 
-        static public List<Deliverable> GetAllDeliverables(string phaseID)
+        static public async Task<List<Deliverable>> GetAllDeliverables(string phaseID)
         {
             List<Deliverable> resultsAsList = new List<Deliverable>();
 
@@ -96,7 +96,7 @@ namespace FITEvents.Classes
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             resultsAsList = JsonConvert.DeserializeObject<List<Deliverable>>(response.Content);
 
