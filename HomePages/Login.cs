@@ -13,6 +13,7 @@ using FITEvents.ItemPages;
 using FITEvents.ListPages;
 using FITEvents.ExecutionPages;
 using Android.Util;
+using System.Threading;
 
 namespace FITEvents.HomePages
 {
@@ -26,6 +27,7 @@ namespace FITEvents.HomePages
         Entry entPassword;
         Button btnLogin;
         Button btnSignup;
+        ActivityIndicator spinner;
 
         public Login()
         {
@@ -62,6 +64,7 @@ namespace FITEvents.HomePages
             };
             btnSignup.Clicked += OnSignupBtnClick;
 
+            spinner = new ActivityIndicator();
 
             this.Content = new StackLayout
             {
@@ -71,12 +74,13 @@ namespace FITEvents.HomePages
                     lblPassword,
                     entPassword,
                     btnLogin,
-                    btnSignup
+                    btnSignup,
+                    spinner
                 }
             };
         }
 
-        void OnSignupBtnClick(object sender, EventArgs args)
+        async System.Threading.Tasks.Task OnSignupBtnClick(object sender, EventArgs args)
         {
             string username = entUsername.Text.ToLower();
             string password = entPassword.Text;
@@ -89,7 +93,7 @@ namespace FITEvents.HomePages
             request.AddParameter("password", password);
             request.AddParameter("connection", "Username-Password-Authentication");
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             //lblResponse.Text = response.Content.ToString();
             Log.Info("FITEVENTS", "Successful Login");
@@ -97,20 +101,20 @@ namespace FITEvents.HomePages
             if ((int)response.StatusCode == 200)
             {
                 Log.Info("FITEVENTS","Successful signup");
-                if (TryLogin())
+                try
                 {
-
+                    await TryLogin();
                     User user = new User();
                     user.userEmail = username;
                     user.Create();
                     Log.Info("FITEVENTS", "User Created");
                     Globals.loggedInUser = User.GetLoggedInUser();
-                    Navigation.PushModalAsync(new Home());
+                    await Navigation.PushModalAsync(new Home());
                 }
-                else
+                catch
                 {
                     Log.Info("FITEVENTS", "Fail Login");
-                    DisplayAlert("Error", "Error. Http Status: " + response.StatusCode + ". Error Message: " + response.Content, "OK");
+                    await DisplayAlert("Error", "Error. Http Status: " + response.StatusCode + ". Error Message: " + response.Content, "OK");
                 }
                 
             }
@@ -118,21 +122,24 @@ namespace FITEvents.HomePages
             else
             {
                 Log.Info("FITEVENTS", "Fail Signup");
-                DisplayAlert("Error", "Error. Http Status: " + response.StatusCode + ". Error Message: " + response.Content, "OK");
+                await DisplayAlert("Error", "Error. Http Status: " + response.StatusCode + ". Error Message: " + response.Content, "OK");
             }
                
 
         }
 
-        void OnLoginBtnClick(object sender, EventArgs args)
+        async void OnLoginBtnClick(object sender, EventArgs args)
         {
-            TryLogin();
+            await TryLogin();
             Globals.loggedInUser = User.GetLoggedInUser();
-            Navigation.PushModalAsync(new Home());
+            await Navigation.PushModalAsync(new Home());
         }
 
-        bool TryLogin()
+        async System.Threading.Tasks.Task TryLogin()
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
+
             string username = entUsername.Text.ToLower();
             string password = entPassword.Text;
 
@@ -146,7 +153,8 @@ namespace FITEvents.HomePages
             request.AddParameter("grant_type", "password");
             request.AddParameter("scope", "openid");
 
-            IRestResponse response = client.Execute(request);
+            //IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             if ((int)response.StatusCode == 200)
             {
@@ -155,15 +163,13 @@ namespace FITEvents.HomePages
                 JObject responeObject = JObject.Parse(responseText);
                 string id_token = (string)responeObject["id_token"];
                 Globals.BearerCode = id_token;
-                Log.Info("FITEVENTS", "Try Get LoggedInUser");                
-                return true;
-                
+                Log.Info("FITEVENTS", "Try Get LoggedInUser");                                
             }
 
             else
             {
-                DisplayAlert("Error", "Error. Http Status: " + response.StatusCode + ". Error Message: " + response.Content, "OK");
-                return false;
+                await DisplayAlert("Error", "Error. Http Status: " + response.StatusCode + ". Error Message: " + response.Content, "OK");
+                throw new Exception("Login Failed");
             }
         }
     }
