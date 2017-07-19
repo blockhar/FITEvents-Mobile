@@ -49,6 +49,7 @@ namespace FITEvents.HomePages
 
         async void OnEventExecutionBtnClick(object sender, EventArgs e)
         {
+            Cache.taskList = await Task.GetAllEventTasks(Globals.ActiveEvent.eventID);
             await Navigation.PushModalAsync(new executionDayView());
         }
 

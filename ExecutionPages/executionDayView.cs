@@ -39,7 +39,7 @@ namespace FITEvents.ExecutionPages
         public executionDayView()
         {
             //Cache.taskList = Task.GetAllTasks("delID123");
-            Cache.taskList = Task.GetAllEventTasks(Globals.ActiveEvent.eventID);
+            
 
             Label header = new Label
             {
