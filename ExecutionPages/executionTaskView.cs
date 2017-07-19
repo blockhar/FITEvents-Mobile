@@ -26,7 +26,7 @@ namespace FITEvents.ExecutionPages
                 this.task = _task;
                 this.name = _task.taskName;
                 this.assignedToName = _task.assignedToName;
-                this.dueDate = _task.dueDate;
+                this.dueDate = _task.dueDateLocal;
                 this.dueDateGroup = dueDate.Date.AddHours(dueDate.Hour);
                 if (String.IsNullOrEmpty(_task.completedBy))
                 {

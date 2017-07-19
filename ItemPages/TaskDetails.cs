@@ -36,8 +36,8 @@ namespace FITEvents.ItemPages
             lbltaskName = new Label { Text = "Task Name" };
             enttaskName = new Entry { Text = task.taskName };
             lbldueDate = new Label { Text = "Due Date"};
-            entdueDate = new DatePicker { Date = task.dueDate.Date };
-            entdueTime = new TimePicker { Time = task.dueDate.TimeOfDay };
+            entdueDate = new DatePicker { Date = task.dueDateLocal.Date };
+            entdueTime = new TimePicker { Time = task.dueDateLocal.TimeOfDay };
             lblassignedTo = new Label { Text = "Assigned To"}; 
             btnassignedTo = new Button { Text = task.assignedToName};
             btnassignedTo.Clicked += OnAssignedToClicked;

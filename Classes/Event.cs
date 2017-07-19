@@ -14,6 +14,7 @@ namespace FITEvents.Classes
         public string eventID { get; set; }
         public string eventName { get; set; }
         public DateTime eventDate { get; set; }
+        public DateTime eventDateLocal { get { return eventDate.ToLocalTime(); } set { } }
         public string eventLocation { get; set; }
         public string eventAdmin { get; set; }
 

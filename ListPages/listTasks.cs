@@ -42,7 +42,7 @@ namespace FITEvents.ListPages
                     deliverableLabel.SetBinding(Label.TextProperty, "deliverableName");
 
                     Label dueDateLabel = new Label();
-                    dueDateLabel.SetBinding(Label.TextProperty, "dueDate");
+                    dueDateLabel.SetBinding(Label.TextProperty, "dueDateLocal");
 
                     // Return an assembled ViewCell.
                     return new ViewCell

@@ -14,6 +14,7 @@ namespace FITEvents.Classes
         public string deliverableID { get; set; }
         public string deliverableName { get; set; }
         public DateTime dueDate { get; set; }
+        public DateTime dueDateLocal { get { return dueDate.ToLocalTime(); } set { } }
         public string assignedTo { get; set; }
         public string assignedToName { get; set; }
         public string completedBy { get; set; }
@@ -46,6 +47,7 @@ namespace FITEvents.Classes
 
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
+            //this.dueDate = this.dueDate.ToUniversalTime();
             request.AddJsonBody(this);
 
 
