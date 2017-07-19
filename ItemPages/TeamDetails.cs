@@ -59,7 +59,7 @@ namespace FITEvents.ItemPages
             };
         }
 
-        void Save(object sender, EventArgs e)
+        async void Save(object sender, EventArgs e)
         {
             team.teamName = entTeamName.Text;
 
@@ -68,9 +68,9 @@ namespace FITEvents.ItemPages
             if (String.IsNullOrEmpty(team.teamID))
             {
                 Log.Info("FITEVENTS", "Try Create team");
-                team = team.Create();
+                team = await team.Create();
                 Log.Info("FITEVENTS", "Team created.");
-                Navigation.PushModalAsync(new listTeamMembers(new List<TeamMember>(), team));
+                await Navigation.PushModalAsync(new listTeamMembers(new List<TeamMember>(), team));
             }
             else
             {
@@ -88,10 +88,10 @@ namespace FITEvents.ItemPages
 
         }
 
-        void OnbtnMembersClick(object sender, EventArgs e)
+        async void OnbtnMembersClick(object sender, EventArgs e)
         {
-            List<TeamMember> allTeamMembers = TeamMember.GetAllTeamMembers(team.teamID);
-            Navigation.PushModalAsync(new listTeamMembers(allTeamMembers, team));
+            List<TeamMember> allTeamMembers = await TeamMember.GetAllTeamMembers(team.teamID);
+            await Navigation.PushModalAsync(new listTeamMembers(allTeamMembers, team));
         }
     }
 }

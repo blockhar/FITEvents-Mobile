@@ -64,15 +64,15 @@ namespace FITEvents.ItemPages
             };
         }
 
-        void Save(object sender, EventArgs e)
+        async void Save(object sender, EventArgs e)
         {
             phase.phaseName = entPhaseName.Text;
             phase.phaseOrder = int.Parse(entPhaseOrder.Text);
 
             if (String.IsNullOrEmpty(phase.phaseID))
             {
-                phase = phase.Create();
-                Navigation.PushModalAsync(new listDeliverables(new List<Deliverable>(), phase));
+                phase = await phase.Create();
+                await Navigation.PushModalAsync(new listDeliverables(new List<Deliverable>(), phase));
             }
             else
             {
@@ -93,7 +93,7 @@ namespace FITEvents.ItemPages
         async void OnbtnDeliverablesClick(object sender, EventArgs e)
         {
             List<Deliverable> allDeliverables = await Deliverable.GetAllDeliverables(phase.phaseID);
-            Navigation.PushModalAsync(new listDeliverables(allDeliverables, phase));
+            await Navigation.PushModalAsync(new listDeliverables(allDeliverables, phase));
         }
     }
 }

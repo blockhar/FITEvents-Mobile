@@ -101,26 +101,26 @@ namespace FITEvents.ItemPages
             }
         }
 
-        void Close(object sender, EventArgs e)
+        async void Close(object sender, EventArgs e)
         {
-            Navigation.PopModalAsync();
+            await Navigation.PopModalAsync();
         }
 
-        void OnbtnDeleteClick(object sender, EventArgs e)
+        async void OnbtnDeleteClick(object sender, EventArgs e)
         {
-            deliverable.Delete();
+            await deliverable.Delete();
         }
 
-        void OnbtnTasksClick(object sender, EventArgs e)
+        async void OnbtnTasksClick(object sender, EventArgs e)
         {
-            List<Task> allTasks = Task.GetAllTasks(deliverable.deliverableID);
-            Navigation.PushModalAsync(new listTasks(allTasks, deliverable));
+            List<Task> allTasks = await Task.GetAllTasks(deliverable.deliverableID);
+            await Navigation.PushModalAsync(new listTasks(allTasks, deliverable));
         }
 
-        void OnTeamBtnClicked(object sender = null, EventArgs e = null)
+        async void OnTeamBtnClicked(object sender = null, EventArgs e = null)
         {
-            List<Team> allTeams = Team.GetAllTeams(Globals.ActiveEvent.eventID);
-            Navigation.PushModalAsync(new ModalTeam(this, allTeams));
+            List<Team> allTeams = await Team.GetAllTeams(Globals.ActiveEvent.eventID);
+            await Navigation.PushModalAsync(new ModalTeam(this, allTeams));
         }
 
         public void updateTeam(Team team)

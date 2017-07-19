@@ -29,7 +29,7 @@ namespace FITEvents.Classes
             phaseOrder = _phaseOrder;
         }
 
-        public void Save()
+        public async void Save()
         {
             var client = Globals.client;
             var request = new RestRequest("api/phase", Method.PUT);
@@ -39,12 +39,12 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             //response.StatusCode
         }
 
-        public Phase Create()
+        public async Task<Phase> Create()
         {
             var client = Globals.client;
             var request = new RestRequest("api/phase", Method.POST);
@@ -54,13 +54,13 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             Phase phase = JsonConvert.DeserializeObject<Phase>(response.Content);
             return phase;
             //response.StatusCode
         }
-        static public Phase GetPhase(string phaseID)
+        static public async Task<Phase> GetPhase(string phaseID)
         {
             var client = Globals.client;
             var request = new RestRequest("api/phase/" + phaseID, Method.GET);
@@ -68,14 +68,14 @@ namespace FITEvents.Classes
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             Phase phase = JsonConvert.DeserializeObject<Phase>(response.Content);
 
             return phase;
         }
 
-        static public List<Phase> GetAllPhases(string eventID)
+        static public async Task<List<Phase>> GetAllPhases(string eventID)
         {
             List<Phase> resultsAsList = new List<Phase>();
 
@@ -85,7 +85,7 @@ namespace FITEvents.Classes
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             resultsAsList = JsonConvert.DeserializeObject<List<Phase>>(response.Content);
 
@@ -93,7 +93,7 @@ namespace FITEvents.Classes
 
         }
 
-        public void Delete()
+        public async void Delete()
         {
             var client = Globals.client;
             var request = new RestRequest("api/phase", Method.DELETE);
@@ -103,7 +103,7 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             //response.StatusCode
         }

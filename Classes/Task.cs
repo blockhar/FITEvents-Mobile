@@ -40,23 +40,22 @@ namespace FITEvents.Classes
             notes = _notes;
         }
 
-        public void Save()
+        public async void Save()
         {
             var client = Globals.client;
             var request = new RestRequest("api/task", Method.PUT);
 
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
-            //this.dueDate = this.dueDate.ToUniversalTime();
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             //response.StatusCode
         }
 
-        public Task Create()
+        public async Task<Task> Create()
         {
             var client = Globals.client;
             var request = new RestRequest("api/task", Method.POST);
@@ -66,14 +65,14 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             Task task = JsonConvert.DeserializeObject<Task>(response.Content);
 
             return task;
             //response.StatusCode
         }
-        static public Task GetTask(string taskID)
+        static public async Task<Task> GetTask(string taskID)
         {
             var client = Globals.client;
             var request = new RestRequest("api/task/" + taskID, Method.GET);
@@ -81,14 +80,14 @@ namespace FITEvents.Classes
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             Task task = JsonConvert.DeserializeObject<Task>(response.Content);
 
             return task;
         }
 
-        static public List<Task> GetAllTasks(string deliverableID)
+        static public async Task<List<Task>> GetAllTasks(string deliverableID)
         {
             List<Task> resultsAsList = new List<Task>();
 
@@ -98,7 +97,7 @@ namespace FITEvents.Classes
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             resultsAsList = JsonConvert.DeserializeObject<List<Task>>(response.Content);
 
@@ -107,7 +106,7 @@ namespace FITEvents.Classes
         }
 
         //GetAllEventTasks
-        static public List<Task> GetAllEventTasks(string eventID)
+        static public async Task<List<Task>> GetAllEventTasks(string eventID)
         {
             List<Task> resultsAsList = new List<Task>();
 
@@ -117,7 +116,7 @@ namespace FITEvents.Classes
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             resultsAsList = JsonConvert.DeserializeObject<List<Task>>(response.Content);
 
@@ -125,7 +124,7 @@ namespace FITEvents.Classes
 
         }
 
-        public void Delete()
+        public async void Delete()
         {
             var client = Globals.client;
             var request = new RestRequest("api/task", Method.DELETE);
@@ -135,7 +134,7 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             //response.StatusCode
         }

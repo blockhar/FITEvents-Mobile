@@ -103,12 +103,12 @@ namespace FITEvents.HomePages
                 Log.Info("FITEVENTS","Successful signup");
                 try
                 {
-                    await TryLogin();
+                    TryLogin();
                     User user = new User();
                     user.userEmail = username;
-                    user.Create();
+                    await user.Create();
                     Log.Info("FITEVENTS", "User Created");
-                    Globals.loggedInUser = User.GetLoggedInUser();
+                    Globals.loggedInUser = await User.GetLoggedInUser();
                     await Navigation.PushModalAsync(new Home());
                 }
                 catch
@@ -130,12 +130,12 @@ namespace FITEvents.HomePages
 
         async void OnLoginBtnClick(object sender, EventArgs args)
         {
-            await TryLogin();
-            Globals.loggedInUser = User.GetLoggedInUser();
+            TryLogin();
+            Globals.loggedInUser = await User.GetLoggedInUser();
             await Navigation.PushModalAsync(new Home());
         }
 
-        async System.Threading.Tasks.Task TryLogin()
+        async void TryLogin()
         {
             spinner.IsVisible = true;
             spinner.IsRunning = true;
@@ -153,7 +153,6 @@ namespace FITEvents.HomePages
             request.AddParameter("grant_type", "password");
             request.AddParameter("scope", "openid");
 
-            //IRestResponse response = client.Execute(request);
             IRestResponse response = await client.ExecuteTaskAsync(request);
 
             if ((int)response.StatusCode == 200)

@@ -88,10 +88,10 @@ namespace FITEvents.ListPages
             ((ListView)sender).SelectedItem = null; //uncomment line if you want to disable the visual selection state.
         }
 
-        private void OnbtnNewTeamMemberClick(object sender, EventArgs e)
+        private async void OnbtnNewTeamMemberClick(object sender, EventArgs e)
         {
-            List<TeamMember> allTeamMembers = TeamMember.GetAllEventTeamMembers(Globals.ActiveEvent.eventID);
-            Navigation.PushModalAsync(new ModalEventMembers(allTeamMembers, team));
+            List<TeamMember> allTeamMembers = await TeamMember.GetAllEventTeamMembers(Globals.ActiveEvent.eventID);
+            await Navigation.PushModalAsync(new ModalEventMembers(allTeamMembers, team));
         }
     }
 }

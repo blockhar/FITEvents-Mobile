@@ -64,13 +64,13 @@ namespace FITEvents.ItemPages
 
         }
 
-        void Save(object sender, EventArgs e)
+        async void Save(object sender, EventArgs e)
         {
             user.userName = entUserName.Text;
             user.userPhone = entUserPhone.Text;
             if (String.IsNullOrEmpty(user.userID))
             {
-                user = user.Create();
+                user = await user.Create();
             }
             else
             {

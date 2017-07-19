@@ -28,7 +28,7 @@ namespace FITEvents.Classes
             userPhone = _userPhone;
         }
 
-        public void Save()
+        public async void Save()
         {
             var client = Globals.client;
             var request = new RestRequest("api/user", Method.PUT);
@@ -38,12 +38,12 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             //response.StatusCode
         }
 
-        public User Create()
+        public async Task<User> Create()
         {
             var client = Globals.client;
             var request = new RestRequest("api/user/", Method.POST);
@@ -53,14 +53,14 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             Log.Info("FITEVENTS", "User Create response: " + response.Content);
 
             User user = JsonConvert.DeserializeObject<User>(response.Content);
             return user;
         }
-        static public User GetUser(string userID)
+        static public async Task<User> GetUser(string userID)
         {
             var client = Globals.client;
             var request = new RestRequest("api/user/" + userID, Method.GET);
@@ -68,14 +68,14 @@ namespace FITEvents.Classes
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             User user = JsonConvert.DeserializeObject<User>(response.Content);
 
             return user;
         }
 
-        static public User GetLoggedInUser()
+        static public async Task<User> GetLoggedInUser()
         {
             var client = Globals.client;
             var request = new RestRequest("api/user/", Method.GET);
@@ -83,7 +83,7 @@ namespace FITEvents.Classes
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             Log.Info("FITEVENTS", "User Get Logged In User response: " + response.Content);
 
@@ -92,7 +92,7 @@ namespace FITEvents.Classes
             return user;
         }
 
-        static public List<User> GetAllUsers(string eventID)
+        static public async Task<List<User>> GetAllUsers(string eventID)
         {
             List<User> resultsAsList = new List<User>();
 
@@ -101,7 +101,7 @@ namespace FITEvents.Classes
 
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             resultsAsList = JsonConvert.DeserializeObject<List<User>>(response.Content);
 
@@ -109,7 +109,7 @@ namespace FITEvents.Classes
 
         }
 
-        public void Delete()
+        public async void Delete()
         {
             var client = Globals.client;
             var request = new RestRequest("api/user", Method.DELETE);
@@ -119,7 +119,7 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             //response.StatusCode
         }

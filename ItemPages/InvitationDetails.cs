@@ -68,12 +68,12 @@ namespace FITEvents.ItemPages
             };
         }
 
-        void Send(object sender, EventArgs e)
+        async void Send(object sender, EventArgs e)
         {
             teaminvitation.inviteEmail = entInviteEmail.Text;
-            teaminvitation.Create();
-            DisplayAlert("Confirmation", "Invitation has been sent!", "OK");
-            Navigation.PopModalAsync();
+            await teaminvitation.Create();
+            await DisplayAlert("Confirmation", "Invitation has been sent!", "OK");
+            await Navigation.PopModalAsync();
         }
 
         void Accept(object sender, EventArgs e)

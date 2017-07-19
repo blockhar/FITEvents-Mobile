@@ -29,7 +29,7 @@ namespace FITEvents.Classes
 
         }
 
-        public void Accept()
+        public async void Accept()
         {
             this.status = "Accepted";
             var client = Globals.client;
@@ -39,12 +39,12 @@ namespace FITEvents.Classes
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
             request.AddJsonBody(this);
             
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             //response.StatusCode
         }
 
-        public void Decline()
+        public async void Decline()
         {
             this.status = "Declined";
             var client = Globals.client;
@@ -55,12 +55,12 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             //response.StatusCode
         }
 
-        public TeamInvitation Create()
+        public async Task<TeamInvitation> Create()
         {
             var client = Globals.client;
             var request = new RestRequest("api/teaminvitation", Method.POST);
@@ -69,13 +69,13 @@ namespace FITEvents.Classes
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
             request.AddJsonBody(this);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             TeamInvitation teamInvitation = JsonConvert.DeserializeObject<TeamInvitation>(response.Content);
             return teamInvitation;
             //response.StatusCode
         }
-        static public TeamInvitation GetAllTeamInvites(string teamID)
+        static public async Task<TeamInvitation> GetAllTeamInvites(string teamID)
         {
             var client = Globals.client;
             var request = new RestRequest("api/teaminvitation/getallteam/" + teamID, Method.GET);
@@ -83,14 +83,14 @@ namespace FITEvents.Classes
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             TeamInvitation team = JsonConvert.DeserializeObject<TeamInvitation>(response.Content);
 
             return team;
         }
 
-        static public List<TeamInvitation> GetAllEventInvites(string eventID)
+        static public async Task<List<TeamInvitation>> GetAllEventInvites(string eventID)
         {
             List<TeamInvitation> resultsAsList = new List<TeamInvitation>();
 
@@ -100,7 +100,7 @@ namespace FITEvents.Classes
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             resultsAsList = JsonConvert.DeserializeObject<List<TeamInvitation>>(response.Content);
 
@@ -108,7 +108,7 @@ namespace FITEvents.Classes
 
         }
 
-        async static public Task<List<TeamInvitation>> GetAllEmailInvites()
+         static public async Task<List<TeamInvitation>> GetAllEmailInvites()
         {
             List<TeamInvitation> resultsAsList = new List<TeamInvitation>();
 
@@ -118,7 +118,7 @@ namespace FITEvents.Classes
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             resultsAsList = JsonConvert.DeserializeObject<List<TeamInvitation>>(response.Content);
 
@@ -126,7 +126,7 @@ namespace FITEvents.Classes
 
         }
 
-        public void Delete()
+        public async void Delete()
         {
             var client = Globals.client;
             var request = new RestRequest("api/teaminvitation", Method.DELETE);
@@ -136,7 +136,7 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             //response.StatusCode
         }

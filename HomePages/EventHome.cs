@@ -47,20 +47,20 @@ namespace FITEvents.HomePages
 
         }
 
-        void OnEventExecutionBtnClick(object sender, EventArgs e)
+        async void OnEventExecutionBtnClick(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new executionDayView());
+            await Navigation.PushModalAsync(new executionDayView());
         }
 
-        void OnEventManagementBtnClick(object sender, EventArgs e)
+        async void OnEventManagementBtnClick(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new EventDetails(activeEvent));
+            await Navigation.PushModalAsync(new EventDetails(activeEvent));
         }
 
-        void onTeamManagementBtnClick(object sender, EventArgs e)
+        async void onTeamManagementBtnClick(object sender, EventArgs e)
         {
-            List<Team> allTeams = Team.GetAllTeams(activeEvent.eventID);
-            Navigation.PushModalAsync(new listTeams(allTeams, activeEvent));
+            List<Team> allTeams = await Team.GetAllTeams(activeEvent.eventID);
+            await Navigation.PushModalAsync(new listTeams(allTeams, activeEvent));
         }
     }
 }

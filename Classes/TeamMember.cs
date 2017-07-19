@@ -31,7 +31,7 @@ namespace FITEvents.Classes
             teamMemberPhone = _teamMemberPhone;
         }
 
-        public void Save()
+        public async void Save()
         {
             var client = Globals.client;
             var request = new RestRequest("api/teamMember", Method.PUT);
@@ -41,12 +41,12 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             //response.StatusCode
         }
 
-        public void Create()
+        public async void Create()
         {
             var client = Globals.client;
             var request = new RestRequest("api/teamMember", Method.POST);
@@ -56,11 +56,11 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
 
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             //response.StatusCode
         }
-        static public TeamMember GetTeamMember(string teamMemberID)
+        static public async Task<TeamMember> GetTeamMember(string teamMemberID)
         {
             var client = Globals.client;
             var request = new RestRequest("api/teamMember/" + teamMemberID, Method.GET);
@@ -68,14 +68,14 @@ namespace FITEvents.Classes
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             TeamMember teamMember = JsonConvert.DeserializeObject<TeamMember>(response.Content);
 
             return teamMember;
         }
 
-        static public List<TeamMember> GetAllTeamMembers(string teamID)
+        static public async Task<List<TeamMember>> GetAllTeamMembers(string teamID)
         {
             List<TeamMember> resultsAsList = new List<TeamMember>();
 
@@ -86,7 +86,7 @@ namespace FITEvents.Classes
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
             Log.Info("FITEVENTS", "Checking bearer code: " + Globals.BearerCode);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
             Log.Info("FITEVENTS", "Get all team members response: " + response.Content );
 
             resultsAsList = JsonConvert.DeserializeObject<List<TeamMember>>(response.Content);
@@ -95,7 +95,7 @@ namespace FITEvents.Classes
 
         }
 
-        static public List<TeamMember> GetAllEventTeamMembers(string eventID)
+        static public async Task<List<TeamMember>> GetAllEventTeamMembers(string eventID)
         {
             List<TeamMember> resultsAsList = new List<TeamMember>();
 
@@ -106,7 +106,7 @@ namespace FITEvents.Classes
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
             Log.Info("FITEVENTS", "Checking bearer code: " + Globals.BearerCode);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
             Log.Info("FITEVENTS", "Get all team members response: " + response.Content);
 
             resultsAsList = JsonConvert.DeserializeObject<List<TeamMember>>(response.Content);
@@ -115,7 +115,7 @@ namespace FITEvents.Classes
 
         }
 
-        public void Delete()
+        public async void Delete()
         {
             var client = Globals.client;
             var request = new RestRequest("api/teamMember", Method.DELETE);
@@ -124,7 +124,7 @@ namespace FITEvents.Classes
             request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
             request.AddJsonBody(this);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteTaskAsync(request);
 
             //response.StatusCode
         }

@@ -104,7 +104,7 @@ namespace FITEvents.Classes
 
         }
 
-        public async void Delete()
+        public async System.Threading.Tasks.Task Delete()
         {
             var client = Globals.client;
             var request = new RestRequest("api/deliverable", Method.DELETE);

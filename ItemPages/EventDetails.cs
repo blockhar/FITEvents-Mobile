@@ -79,7 +79,7 @@ namespace FITEvents.ItemPages
             {
                 Log.Info("FITEVENTS","Creating Event");
                 myEvent = await myEvent.Create();
-                Navigation.PushModalAsync(new listPhases(new List<Phase>(), myEvent));
+                await Navigation.PushModalAsync(new listPhases(new List<Phase>(), myEvent));
             }
             else
             {
@@ -98,10 +98,10 @@ namespace FITEvents.ItemPages
 
         }
 
-        void OnbtnPhasesClick(object sender, EventArgs e)
+        async void OnbtnPhasesClick(object sender, EventArgs e)
         {
-            List<Phase> allPhases = Phase.GetAllPhases(myEvent.eventID);
-            Navigation.PushModalAsync(new listPhases(allPhases, myEvent));
+            List<Phase> allPhases = await Phase.GetAllPhases(myEvent.eventID);
+            await Navigation.PushModalAsync(new listPhases(allPhases, myEvent));
         }
     }
 }

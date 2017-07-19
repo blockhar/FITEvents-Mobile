@@ -81,27 +81,26 @@ namespace FITEvents.ItemPages
 
         }
 
-        void OnCompletedByClicked(object sender = null, EventArgs e = null)
+        async void OnCompletedByClicked(object sender = null, EventArgs e = null)
         {
-            List<TeamMember> allTeamMembers = TeamMember.GetAllTeamMembers(Globals.ActiveEvent.eventID);
-            //List<TeamMember> allTeamMembers = TeamMember.GetAllTeamMembers("eventID123");
-            Navigation.PushModalAsync(new ModalTeamMember(this, allTeamMembers, "completedBy"));
+            List<TeamMember> allTeamMembers = await TeamMember.GetAllTeamMembers(Globals.ActiveEvent.eventID);
+            await Navigation.PushModalAsync(new ModalTeamMember(this, allTeamMembers, "completedBy"));
         }
 
-        void OnAssignedToClicked(object sender = null, EventArgs e = null)
+        async void OnAssignedToClicked(object sender = null, EventArgs e = null)
         {
-            List<TeamMember> allTeamMembers = TeamMember.GetAllTeamMembers(Globals.ActiveEvent.eventID);
-            Navigation.PushModalAsync(new ModalTeamMember(this, allTeamMembers, "assignedTo"));
+            List<TeamMember> allTeamMembers = await TeamMember.GetAllTeamMembers(Globals.ActiveEvent.eventID);
+            await Navigation.PushModalAsync(new ModalTeamMember(this, allTeamMembers, "assignedTo"));
         }
 
-        void Save(object sender, EventArgs e)
+        async void Save(object sender, EventArgs e)
         {
             task.taskName = enttaskName.Text;
             task.dueDate = DateTime.Parse(entdueDate.Date.ToShortDateString() + " " + entdueTime.Time.ToString());
             task.notes = entnotes.Text;
             if (String.IsNullOrEmpty(task.taskID))
             {
-                task = task.Create();
+                task = await task.Create();
             }
             else
             {

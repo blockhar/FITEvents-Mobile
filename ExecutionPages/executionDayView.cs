@@ -131,7 +131,17 @@ namespace FITEvents.ExecutionPages
             listView.ItemSelected += OnSelection;
 
             // Accomodate iPhone status bar.
-            this.Padding = new Thickness(10, Device.OnPlatform(20, 0, 0), 10, 5);
+            int top;
+            switch (Device.RuntimePlatform)
+            {
+                case Device.iOS:
+                    top = 20;
+                    break;
+                default:
+                    top = 0;
+                    break;
+            }
+            this.Padding = new Thickness(10, top, 10, 5);
 
             // Build the page.
             this.Content = new StackLayout

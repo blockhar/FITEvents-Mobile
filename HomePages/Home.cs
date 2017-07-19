@@ -62,7 +62,7 @@ namespace FITEvents.HomePages
         async void OnEventsBtnClick(object sender, EventArgs e)
         {
             List<Event> allEvents = await Event.GetAllEvents();
-            Navigation.PushModalAsync(new listEvents(allEvents));
+            await Navigation.PushModalAsync(new listEvents(allEvents));
         }
 
         
