@@ -27,6 +27,7 @@ namespace FITEvents.ItemPages
         Button btnSaveClose;
         Button btnSave;
         Button btnDelete;
+        ActivityIndicator spinner;
 
         Deliverable deliverable;
         
@@ -55,6 +56,7 @@ namespace FITEvents.ItemPages
             btnSave.Clicked += Save;
             btnDelete = new Button { Text = "Delete" };
             btnDelete.Clicked += OnbtnDeleteClick;
+            spinner = new ActivityIndicator();
 
             StackLayout stack = new StackLayout {
                 Children = {
@@ -72,7 +74,8 @@ namespace FITEvents.ItemPages
                     entnotes,
                     btnSaveClose,
                     btnSave,
-                    btnDelete
+                    btnDelete,
+                    spinner
 				}
 			};
 
@@ -84,6 +87,8 @@ namespace FITEvents.ItemPages
 
         async void Save(object sender, EventArgs e)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             deliverable.deliverableName = entdeliverableName.Text;
             deliverable.vendorID = entvendorName.Text;
             deliverable.priority = int.Parse(entpriority.Text);
@@ -99,6 +104,8 @@ namespace FITEvents.ItemPages
             {
                 deliverable.Save();
             }
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
 
         async void Close(object sender, EventArgs e)
@@ -108,19 +115,32 @@ namespace FITEvents.ItemPages
 
         async void OnbtnDeleteClick(object sender, EventArgs e)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             await deliverable.Delete();
+            await Navigation.PopModalAsync();
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
 
         async void OnbtnTasksClick(object sender, EventArgs e)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             List<Task> allTasks = await Task.GetAllTasks(deliverable.deliverableID);
             await Navigation.PushModalAsync(new listTasks(allTasks, deliverable));
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
 
         async void OnTeamBtnClicked(object sender = null, EventArgs e = null)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             List<Team> allTeams = await Team.GetAllTeams(Globals.ActiveEvent.eventID);
             await Navigation.PushModalAsync(new ModalTeam(this, allTeams));
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
 
         public void updateTeam(Team team)

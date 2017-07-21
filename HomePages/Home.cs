@@ -68,13 +68,15 @@ namespace FITEvents.HomePages
         
        async void OnInvitationsBtnClick(object sender, EventArgs e)
         {
-             spinner.IsRunning = true;
-             List<TeamInvitation> allInvites = await TeamInvitation.GetAllEmailInvites();
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
+            List<TeamInvitation> allInvites = await TeamInvitation.GetAllEmailInvites();
 
             allInvites = allInvites.Where(i => i.status == "Pending").ToList();
 
             await Navigation.PushModalAsync(new listInvitations(allInvites));
             spinner.IsRunning = false;
+            spinner.IsVisible = false;
 
         }
     }

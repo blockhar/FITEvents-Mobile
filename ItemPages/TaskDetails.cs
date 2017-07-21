@@ -26,6 +26,7 @@ namespace FITEvents.ItemPages
         Button btnSave;
         Button btnSaveClose;
         Button btnDelete;
+        ActivityIndicator spinner;
 
         Task task;
 
@@ -53,6 +54,7 @@ namespace FITEvents.ItemPages
             btnSave.Clicked += Save;
             btnDelete = new Button { Text = "Delete" };
             btnDelete.Clicked += OnbtnDeleteClick;
+            spinner = new ActivityIndicator();
 
             StackLayout stack = new StackLayout
             {
@@ -70,7 +72,8 @@ namespace FITEvents.ItemPages
                     entnotes,
                     btnSaveClose,
                     btnSave,
-                    btnDelete                    
+                    btnDelete,
+                    spinner                
                 }
 			};
 
@@ -83,18 +86,28 @@ namespace FITEvents.ItemPages
 
         async void OnCompletedByClicked(object sender = null, EventArgs e = null)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             List<TeamMember> allTeamMembers = await TeamMember.GetAllTeamMembers(Globals.ActiveEvent.eventID);
             await Navigation.PushModalAsync(new ModalTeamMember(this, allTeamMembers, "completedBy"));
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
 
         async void OnAssignedToClicked(object sender = null, EventArgs e = null)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             List<TeamMember> allTeamMembers = await TeamMember.GetAllTeamMembers(Globals.ActiveEvent.eventID);
             await Navigation.PushModalAsync(new ModalTeamMember(this, allTeamMembers, "assignedTo"));
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
 
         async void Save(object sender, EventArgs e)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             task.taskName = enttaskName.Text;
             task.dueDate = DateTime.Parse(entdueDate.Date.ToShortDateString() + " " + entdueTime.Time.ToString());
             task.notes = entnotes.Text;
@@ -106,10 +119,17 @@ namespace FITEvents.ItemPages
             {
                 task.Save();
             }
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
 
         void OnbtnDeleteClick(object sender, EventArgs e)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
+            task.Delete();
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
 
         }
 

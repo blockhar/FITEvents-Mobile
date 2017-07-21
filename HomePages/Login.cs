@@ -130,16 +130,17 @@ namespace FITEvents.HomePages
 
         async void OnLoginBtnClick(object sender, EventArgs args)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             TryLogin();
             Globals.loggedInUser = await User.GetLoggedInUser();
             await Navigation.PushModalAsync(new Home());
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
 
         async void TryLogin()
         {
-            spinner.IsVisible = true;
-            spinner.IsRunning = true;
-
             string username = entUsername.Text.ToLower();
             string password = entPassword.Text;
 

@@ -12,6 +12,8 @@ namespace FITEvents.ExecutionPages
 {
     public class executionDayView : ContentPage
     {
+        ActivityIndicator spinner;
+
         class TaskCell
         {
             public Task task { get; set; }
@@ -71,6 +73,7 @@ namespace FITEvents.ExecutionPages
                 groupedWithTitleProperty.Add(group);
             }
 
+            spinner = new ActivityIndicator();
             // Create the ListView.
             ListView listView = new ListView
             {
@@ -107,10 +110,8 @@ namespace FITEvents.ExecutionPages
                         Spacing = 0,
                         Children =
                         {
-                            //nameLabel,
-                            //dueGroupLabel,
-                            dueLabel//,
-                            //assignedToLabel
+                            dueLabel,
+                            spinner
                         }
 
 
@@ -157,6 +158,8 @@ namespace FITEvents.ExecutionPages
 
         void OnSelection(object sender, SelectedItemChangedEventArgs e)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             if (e.SelectedItem == null)
             {
                 return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
@@ -169,7 +172,8 @@ namespace FITEvents.ExecutionPages
                 taskList.Add(taskCell.task);
             }
             Navigation.PushModalAsync(new executionTaskView(taskList));
-
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
             ((ListView)sender).SelectedItem = null; //uncomment line if you want to disable the visual selection state.
         }
     }

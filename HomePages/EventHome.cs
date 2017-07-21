@@ -16,6 +16,7 @@ namespace FITEvents.HomePages
         Button btnEventManagement;
         Button btnTeamManagement;
         Event activeEvent;
+        ActivityIndicator spinner;
 
         public EventHome(Event _activeEvent)
         {
@@ -36,12 +37,14 @@ namespace FITEvents.HomePages
             btnTeamManagement = new Button { Text = "Team Management" };
             btnTeamManagement.Clicked += onTeamManagementBtnClick;
 
+            spinner = new ActivityIndicator();
             this.Content = new StackLayout
             {
                 Children = {
                     btnEventExecution,
                     btnEventManagement,
-                    btnTeamManagement
+                    btnTeamManagement,
+                    spinner
                 }
             };
 
@@ -49,8 +52,12 @@ namespace FITEvents.HomePages
 
         async void OnEventExecutionBtnClick(object sender, EventArgs e)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             Cache.taskList = await Task.GetAllEventTasks(Globals.ActiveEvent.eventID);
             await Navigation.PushModalAsync(new executionDayView());
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
 
         async void OnEventManagementBtnClick(object sender, EventArgs e)

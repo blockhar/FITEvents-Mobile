@@ -18,6 +18,7 @@ namespace FITEvents.ItemPages
         Button btnSend;
         Button btnAccept;
         Button btnDecline;
+        ActivityIndicator spinner;
 
         TeamInvitation teaminvitation;
 
@@ -34,6 +35,7 @@ namespace FITEvents.ItemPages
             btnAccept.Clicked += Accept;
             btnDecline = new Button { Text = "Decline" };
             btnDecline.Clicked += Decline;
+            spinner = new ActivityIndicator();
 
             StackLayout stack;
 
@@ -44,7 +46,8 @@ namespace FITEvents.ItemPages
                     Children = {
                     lblTeamName,
                     btnAccept,
-                    btnDecline
+                    btnDecline,
+                    spinner
                 }
                 };
             }
@@ -56,7 +59,8 @@ namespace FITEvents.ItemPages
                     lblTeamName,
                     lblInviteEmail,
                     entInviteEmail,
-                    btnSend
+                    btnSend,
+                    spinner
                 }
                 };
             }
@@ -70,22 +74,34 @@ namespace FITEvents.ItemPages
 
         async void Send(object sender, EventArgs e)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             teaminvitation.inviteEmail = entInviteEmail.Text;
             await teaminvitation.Create();
             await DisplayAlert("Confirmation", "Invitation has been sent!", "OK");
             await Navigation.PopModalAsync();
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
 
         void Accept(object sender, EventArgs e)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             teaminvitation.Accept();
             Navigation.PopModalAsync();
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
 
         void Decline(object sender, EventArgs e)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             teaminvitation.Decline();
             Navigation.PopModalAsync();
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
     }
 }

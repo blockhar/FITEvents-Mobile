@@ -23,6 +23,7 @@ namespace FITEvents.ItemPages
         Button btnSaveClose;
         Button btnSave;
         Button btnDelete;
+        ActivityIndicator spinner;
 
         Event myEvent;
 
@@ -37,7 +38,6 @@ namespace FITEvents.ItemPages
             lbleventLocation = new Label { Text = "Event Location" };
             enteventLocation = new Entry { Text = myEvent.eventLocation };
             lbleventDate = new Label { Text = "Event Date" };
-            //enteventDate = new DatePicker { Date = myEvent.eventDate };
             enteventDate = new DatePicker { Date = (myEvent.eventDate == DateTime.MinValue ? DateTime.Now : myEvent.eventDate) };
             btnSaveClose = new Button { Text = "Save and Close" };
             btnSaveClose.Clicked += Save;
@@ -46,6 +46,7 @@ namespace FITEvents.ItemPages
             btnSave.Clicked += Save;
             btnDelete = new Button { Text = "Delete" };
             btnDelete.Clicked += OnbtnDeleteClick;
+            spinner = new ActivityIndicator();
 
             StackLayout stack = new StackLayout
             {
@@ -59,7 +60,8 @@ namespace FITEvents.ItemPages
                     enteventDate,
                     btnSaveClose,
                     btnSave,
-                    btnDelete
+                    btnDelete,
+                    spinner
                 }
             };
 
@@ -71,6 +73,8 @@ namespace FITEvents.ItemPages
 
         async void Save(object sender, EventArgs e)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             myEvent.eventName = enteventName.Text;
             myEvent.eventLocation = enteventLocation.Text;
             myEvent.eventDate =  enteventDate.Date;
@@ -86,6 +90,8 @@ namespace FITEvents.ItemPages
                 Log.Info("FITEVENTS", "Saving Event. ID is: " + myEvent.eventID.ToString());
                 myEvent.Save();
             }
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
 
         void Close (object sender, EventArgs e)
@@ -95,13 +101,22 @@ namespace FITEvents.ItemPages
 
         void OnbtnDeleteClick(object sender, EventArgs e)
         {
-
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
+            myEvent.Delete();
+            Navigation.PopModalAsync();
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
 
         async void OnbtnPhasesClick(object sender, EventArgs e)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             List<Phase> allPhases = await Phase.GetAllPhases(myEvent.eventID);
             await Navigation.PushModalAsync(new listPhases(allPhases, myEvent));
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
     }
 }

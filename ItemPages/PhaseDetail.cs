@@ -21,6 +21,7 @@ namespace FITEvents.ItemPages
         Button btnSaveClose;
         Button btnSave;
         Button btnDelete;
+        ActivityIndicator spinner;
 
         Phase phase;
 
@@ -42,6 +43,7 @@ namespace FITEvents.ItemPages
             btnSave.Clicked += Save;
             btnDelete = new Button { Text = "Delete" };
             btnDelete.Clicked += OnbtnDeleteClick;
+            spinner = new ActivityIndicator();
 
             StackLayout stack = new StackLayout
             {
@@ -54,7 +56,8 @@ namespace FITEvents.ItemPages
                     entPhaseOrder,
                     btnSaveClose,
                     btnSave,
-                    btnDelete
+                    btnDelete,
+                    spinner
                 }
             };
 
@@ -66,6 +69,8 @@ namespace FITEvents.ItemPages
 
         async void Save(object sender, EventArgs e)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             phase.phaseName = entPhaseName.Text;
             phase.phaseOrder = int.Parse(entPhaseOrder.Text);
 
@@ -78,22 +83,37 @@ namespace FITEvents.ItemPages
             {
                 phase.Save();
             }
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
 
         void Close(object sender, EventArgs e)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             Navigation.PopModalAsync();
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
 
         void OnbtnDeleteClick(object sender, EventArgs e)
         {
-
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
+            phase.Delete();
+            Navigation.PopModalAsync();
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
 
         async void OnbtnDeliverablesClick(object sender, EventArgs e)
         {
+            spinner.IsVisible = true;
+            spinner.IsRunning = true;
             List<Deliverable> allDeliverables = await Deliverable.GetAllDeliverables(phase.phaseID);
             await Navigation.PushModalAsync(new listDeliverables(allDeliverables, phase));
+            spinner.IsVisible = false;
+            spinner.IsRunning = false;
         }
     }
 }
