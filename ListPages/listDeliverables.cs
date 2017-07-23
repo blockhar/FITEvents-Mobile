@@ -11,13 +11,13 @@ namespace FITEvents.ListPages
 {
     public class listDeliverables : ContentPage
     {
-
+        List<Deliverable> allDeliverables;
         ListView listView;
         Button btnNewDeliverable;
         Phase phase;
         ActivityIndicator spinner;
 
-        public listDeliverables(List<Deliverable> allDeliverables, Phase _phase)
+        public listDeliverables(Phase _phase)
         {
             phase = _phase;
             btnNewDeliverable = new Button { Text = "Create New Deliverable" };
@@ -97,6 +97,16 @@ namespace FITEvents.ListPages
             newDeliverable.phaseID = phase.phaseID;
             newDeliverable.phaseName = phase.phaseName;
             Navigation.PushModalAsync(new DeliverableDetails(newDeliverable));
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
+        }
+
+        async override protected void OnAppearing()
+        {
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
+            allDeliverables = await Deliverable.GetAllDeliverables(phase.phaseID);
+            listView.ItemsSource = allDeliverables;
             spinner.IsRunning = false;
             spinner.IsVisible = false;
         }

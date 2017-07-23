@@ -12,7 +12,7 @@ namespace FITEvents.ListPages
 {
     public class listEvents : ContentPage
     {
-        
+        List<Event> allEvents;
         ListView listView;
         Button btnNewEvent;
         ActivityIndicator spinner;
@@ -92,6 +92,16 @@ namespace FITEvents.ListPages
         {
             Event newEvent = new Event();
             Navigation.PushModalAsync(new EventDetails(newEvent));
+        }
+
+        async override protected void OnAppearing()
+        {
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
+            allEvents = await Event.GetAllEvents();
+            listView.ItemsSource = allEvents;
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
         }
     }
 }

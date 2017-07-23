@@ -14,8 +14,9 @@ namespace FITEvents.ListPages
         Button btnNewTask;
         Deliverable deliverable;
         ActivityIndicator spinner;
+        List<Task> allTasks;
 
-        public listTasks (List<Task> allTasks, Deliverable _deliverable)
+        public listTasks (Deliverable _deliverable)
 		{
             deliverable = _deliverable;
             btnNewTask = new Button { Text = "Create New Task" };
@@ -93,6 +94,16 @@ namespace FITEvents.ListPages
             newtask.deliverableID = deliverable.deliverableID;
             newtask.deliverableName = deliverable.deliverableName;
             await Navigation.PushModalAsync(new TaskDetails(newtask, deliverable.team));
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
+        }
+
+        async override protected void OnAppearing()
+        {
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
+            allTasks = await Task.GetAllTasks(deliverable.deliverableID);
+            listView.ItemsSource = allTasks;
             spinner.IsRunning = false;
             spinner.IsVisible = false;
         }

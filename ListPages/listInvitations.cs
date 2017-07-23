@@ -14,8 +14,9 @@ namespace FITEvents.ListPages
 
         ListView listView;
         ActivityIndicator spinner;
+        List<TeamInvitation> allInvites;
 
-        public listInvitations(List<TeamInvitation> allInvites)
+        public listInvitations()
         {
             spinner = new ActivityIndicator();
             listView = new ListView
@@ -74,6 +75,17 @@ namespace FITEvents.ListPages
             spinner.IsRunning = false;
             spinner.IsVisible = false;
 
+        }
+
+        async override protected void OnAppearing()
+        {
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
+            allInvites = await TeamInvitation.GetAllEmailInvites();
+            allInvites = allInvites.Where(i => i.status == "Pending").ToList();
+            listView.ItemsSource = allInvites;
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
         }
     }
 }

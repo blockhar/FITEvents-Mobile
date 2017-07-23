@@ -96,7 +96,7 @@ namespace FITEvents.ItemPages
             if (String.IsNullOrEmpty(deliverable.deliverableID))
             {
                 deliverable = await deliverable.Create();
-                await Navigation.PushModalAsync(new listTasks(new List<Task>(), deliverable));
+                await Navigation.PushModalAsync(new listTasks(deliverable));
             }
 
             else
@@ -126,8 +126,8 @@ namespace FITEvents.ItemPages
         {
             spinner.IsVisible = true;
             spinner.IsRunning = true;
-            List<Task> allTasks = await Task.GetAllTasks(deliverable.deliverableID);
-            await Navigation.PushModalAsync(new listTasks(allTasks, deliverable));
+            
+            await Navigation.PushModalAsync(new listTasks(deliverable));
             spinner.IsVisible = false;
             spinner.IsRunning = false;
         }

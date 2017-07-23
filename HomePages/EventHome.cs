@@ -67,8 +67,7 @@ namespace FITEvents.HomePages
 
         async void onTeamManagementBtnClick(object sender, EventArgs e)
         {
-            List<Team> allTeams = await Team.GetAllTeams(activeEvent.eventID);
-            await Navigation.PushModalAsync(new listTeams(allTeams, activeEvent));
+            await Navigation.PushModalAsync(new listTeams(activeEvent));
         }
     }
 }

@@ -16,8 +16,9 @@ namespace FITEvents.ListPages
         Button btnNewTeam;
         Event myEvent;
         ActivityIndicator spinner;
+        List<Team> allTeams;
 
-        public listTeams(List<Team> allTeams, Event _myEvent)
+        public listTeams(Event _myEvent)
         {
             myEvent = _myEvent;
             btnNewTeam = new Button { Text = "Create New Team" };
@@ -87,6 +88,16 @@ namespace FITEvents.ListPages
             newTeam.eventID = myEvent.eventID;
             newTeam.eventName = myEvent.eventName;
             Navigation.PushModalAsync(new TeamDetails(newTeam));
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
+        }
+
+        async override protected void OnAppearing()
+        {
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
+            allTeams = await Team.GetAllTeams(myEvent.eventID);
+            listView.ItemsSource = allTeams;
             spinner.IsRunning = false;
             spinner.IsVisible = false;
         }

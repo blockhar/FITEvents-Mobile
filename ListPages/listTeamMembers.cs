@@ -15,8 +15,9 @@ namespace FITEvents.ListPages
         Button btnNewTeamMember;
         Team team;
         ActivityIndicator spinner;
+        List<TeamMember> allTeamMembers;
 
-        public listTeamMembers(List<TeamMember> allTeamMembers, Team _team)
+        public listTeamMembers(Team _team)
         {
             team = _team;
             btnNewTeamMember = new Button { Text = "Add TeamMember" };
@@ -92,6 +93,16 @@ namespace FITEvents.ListPages
             spinner.IsVisible = true;
             List<TeamMember> allTeamMembers = await TeamMember.GetAllEventTeamMembers(Globals.ActiveEvent.eventID);
             await Navigation.PushModalAsync(new ModalEventMembers(allTeamMembers, team));
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
+        }
+
+        async override protected void OnAppearing()
+        {
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
+            allTeamMembers = await TeamMember.GetAllTeamMembers(team.teamID);
+            listView.ItemsSource = allTeamMembers;
             spinner.IsRunning = false;
             spinner.IsVisible = false;
         }

@@ -16,8 +16,9 @@ namespace FITEvents.ListPages
         Button btnNewPhase;
         Event myEvent;
         ActivityIndicator spinner;
+        List<Phase> allPhases;
 
-        public listPhases(List<Phase> allPhases, Event _myEvent)
+        public listPhases(Event _myEvent)
         {
             myEvent = _myEvent;
             btnNewPhase = new Button { Text = "Create New Phase" };
@@ -86,6 +87,16 @@ namespace FITEvents.ListPages
             newPhase.eventID = myEvent.eventID;
             newPhase.eventName = myEvent.eventName;
             Navigation.PushModalAsync(new PhaseDetails(newPhase));
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
+        }
+
+        async override protected void OnAppearing()
+        {
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
+            allPhases = await Phase.GetAllPhases(myEvent.eventID);
+            listView.ItemsSource = allPhases;
             spinner.IsRunning = false;
             spinner.IsVisible = false;
         }

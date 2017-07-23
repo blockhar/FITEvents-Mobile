@@ -69,7 +69,7 @@ namespace FITEvents.ItemPages
                 Log.Info("FITEVENTS", "Try Create team");
                 team = await team.Create();
                 Log.Info("FITEVENTS", "Team created.");
-                await Navigation.PushModalAsync(new listTeamMembers(new List<TeamMember>(), team));
+                await Navigation.PushModalAsync(new listTeamMembers(team));
             }
             else
             {
@@ -88,9 +88,8 @@ namespace FITEvents.ItemPages
         }
 
         async void OnbtnMembersClick(object sender, EventArgs e)
-        {
-            List<TeamMember> allTeamMembers = await TeamMember.GetAllTeamMembers(team.teamID);
-            await Navigation.PushModalAsync(new listTeamMembers(allTeamMembers, team));
+        {         
+            await Navigation.PushModalAsync(new listTeamMembers(team));
         }
     }
 }

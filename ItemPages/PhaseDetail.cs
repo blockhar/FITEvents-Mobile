@@ -76,7 +76,7 @@ namespace FITEvents.ItemPages
             if (String.IsNullOrEmpty(phase.phaseID))
             {
                 phase = await phase.Create();
-                await Navigation.PushModalAsync(new listDeliverables(new List<Deliverable>(), phase));
+                await Navigation.PushModalAsync(new listDeliverables(phase));
             }
             else
             {
@@ -109,8 +109,7 @@ namespace FITEvents.ItemPages
         {
             spinner.IsVisible = true;
             spinner.IsRunning = true;
-            List<Deliverable> allDeliverables = await Deliverable.GetAllDeliverables(phase.phaseID);
-            await Navigation.PushModalAsync(new listDeliverables(allDeliverables, phase));
+            await Navigation.PushModalAsync(new listDeliverables(phase));
             spinner.IsVisible = false;
             spinner.IsRunning = false;
         }
