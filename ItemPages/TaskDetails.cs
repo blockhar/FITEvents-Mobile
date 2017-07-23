@@ -36,7 +36,8 @@ namespace FITEvents.ItemPages
             lbltaskName = new Label { Text = "Task Name" };
             enttaskName = new Entry { Text = task.taskName };
             lbldueDate = new Label { Text = "Due Date"};
-            entdueDate = new DatePicker { Date = task.dueDateLocal.Date };
+            //Check if task has a date. If not, default to date of parent event.
+            entdueDate = new DatePicker { Date = (task.dueDate == DateTime.MinValue ? Globals.ActiveEvent.eventDate : task.dueDate) };
             entdueTime = new TimePicker { Time = task.dueDateLocal.TimeOfDay };
             lblassignedTo = new Label { Text = "Assigned To"}; 
             btnassignedTo = new Button { Text = task.assignedToName};
