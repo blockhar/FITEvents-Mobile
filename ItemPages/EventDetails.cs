@@ -37,6 +37,7 @@ namespace FITEvents.ItemPages
             lbleventLocation = new Label { Text = "Event Location" };
             enteventLocation = new Entry { Text = myEvent.eventLocation };
             lbleventDate = new Label { Text = "Event Date" };
+            //If event has no date (i.e. is being created) default to current date.
             enteventDate = new DatePicker { Date = (myEvent.eventDate == DateTime.MinValue ? DateTime.Now : myEvent.eventDate) };
             btnSaveClose = new Button { Text = "Save and Close" };
             btnSaveClose.Clicked += Save;
