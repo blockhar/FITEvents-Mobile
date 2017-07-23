@@ -28,10 +28,12 @@ namespace FITEvents.ItemPages
         ActivityIndicator spinner;
 
         Task task;
+        string teamID;
 
-        public TaskDetails (Task passedtask)
+        public TaskDetails (Task passedtask, string _teamID)
 		{
             task = passedtask;
+            teamID = _teamID;
 
             lbltaskName = new Label { Text = "Task Name" };
             enttaskName = new Entry { Text = task.taskName };
@@ -88,7 +90,7 @@ namespace FITEvents.ItemPages
         {
             spinner.IsVisible = true;
             spinner.IsRunning = true;
-            List<TeamMember> allTeamMembers = await TeamMember.GetAllTeamMembers(Globals.ActiveEvent.eventID);
+            List<TeamMember> allTeamMembers = await TeamMember.GetAllTeamMembers(teamID);
             await Navigation.PushModalAsync(new ModalTeamMember(this, allTeamMembers, "completedBy"));
             spinner.IsVisible = false;
             spinner.IsRunning = false;
@@ -98,7 +100,7 @@ namespace FITEvents.ItemPages
         {
             spinner.IsVisible = true;
             spinner.IsRunning = true;
-            List<TeamMember> allTeamMembers = await TeamMember.GetAllTeamMembers(Globals.ActiveEvent.eventID);
+            List<TeamMember> allTeamMembers = await TeamMember.GetAllTeamMembers(teamID);
             await Navigation.PushModalAsync(new ModalTeamMember(this, allTeamMembers, "assignedTo"));
             spinner.IsVisible = false;
             spinner.IsRunning = false;

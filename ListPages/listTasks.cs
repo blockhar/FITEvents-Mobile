@@ -69,7 +69,7 @@ namespace FITEvents.ListPages
 			};
 		}
        
-        void OnSelection(object sender, SelectedItemChangedEventArgs e)
+        async void OnSelection(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
             {
@@ -78,21 +78,21 @@ namespace FITEvents.ListPages
             spinner.IsRunning = true;
             spinner.IsVisible = true;
             Task selectedTask = (Task)e.SelectedItem;
-            Navigation.PushModalAsync(new TaskDetails(selectedTask));
+            await Navigation.PushModalAsync(new TaskDetails(selectedTask, deliverable.team));
 
             ((ListView)sender).SelectedItem = null; 
             spinner.IsRunning = false;
             spinner.IsVisible = false;
         }
 
-        private void OnbtnNewTaskClick(object sender, EventArgs e)
+        private async void OnbtnNewTaskClick(object sender, EventArgs e)
         {
             spinner.IsRunning = true;
             spinner.IsVisible = true;
             Task newtask = new Task();
             newtask.deliverableID = deliverable.deliverableID;
             newtask.deliverableName = deliverable.deliverableName;
-            Navigation.PushModalAsync(new TaskDetails(newtask));
+            await Navigation.PushModalAsync(new TaskDetails(newtask, deliverable.team));
             spinner.IsRunning = false;
             spinner.IsVisible = false;
         }
