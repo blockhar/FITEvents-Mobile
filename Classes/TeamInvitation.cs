@@ -40,8 +40,6 @@ namespace FITEvents.Classes
             request.AddJsonBody(this);
             
             IRestResponse response = await client.ExecuteTaskAsync(request);
-
-            //response.StatusCode
         }
 
         public async void Decline()
@@ -56,8 +54,6 @@ namespace FITEvents.Classes
 
 
             IRestResponse response = await client.ExecuteTaskAsync(request);
-
-            //response.StatusCode
         }
 
         public async Task<TeamInvitation> Create()
@@ -73,7 +69,6 @@ namespace FITEvents.Classes
 
             TeamInvitation teamInvitation = JsonConvert.DeserializeObject<TeamInvitation>(response.Content);
             return teamInvitation;
-            //response.StatusCode
         }
         static public async Task<TeamInvitation> GetAllTeamInvites(string teamID)
         {
@@ -137,8 +132,6 @@ namespace FITEvents.Classes
 
 
             IRestResponse response = await client.ExecuteTaskAsync(request);
-
-            //response.StatusCode
         }
     }
 }

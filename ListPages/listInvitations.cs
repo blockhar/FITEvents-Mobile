@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-//using System.Reflection.Emit;
 using System.Text;
 using FITEvents.Classes;
 using FITEvents.ItemPages;
@@ -22,23 +21,17 @@ namespace FITEvents.ListPages
             listView = new ListView
             {
 
-                // Source of data items.
                 ItemsSource = allInvites,
                 HasUnevenRows = true,
 
-                // Define template for displaying each item.
-                // (Argument of DataTemplate constructor is called for 
-                //      each item; it must return a Cell derivative.)
                 ItemTemplate = new DataTemplate(() =>
                 {
-                    // Create views with bindings for displaying each property.
                     Label nameLabel = new Label();
                     nameLabel.SetBinding(Label.TextProperty, "teamName");
 
                     Label eventLabel = new Label();
                     eventLabel.SetBinding(Label.TextProperty, "eventName");
 
-                    // Return an assembled ViewCell.
                     return new ViewCell
                     {
                         View = new StackLayout

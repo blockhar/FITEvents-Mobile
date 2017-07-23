@@ -43,8 +43,6 @@ namespace FITEvents.Classes
 
 
             IRestResponse response = await client.ExecuteTaskAsync(request);
-
-            //response.StatusCode
         }
 
         public async Task<Event> Create()
@@ -60,8 +58,6 @@ namespace FITEvents.Classes
             IRestResponse response = await client.ExecuteTaskAsync(request);
             Event myEvent = JsonConvert.DeserializeObject<Event>(response.Content);
             return myEvent;
-
-            //response.StatusCode
         }
         static public async Task<Event> GetEvent(string eventID)
         {
@@ -99,7 +95,6 @@ namespace FITEvents.Classes
 
             else
             {
-                //DisplayAlert("Error", "Error. Http Status: " + response.StatusCode + ". Error Message: " + response.Content, "OK");
                 Log.Info("FITEVENTS", "Error.Http Status: " + response.StatusCode + ".Error Message: " + response.Content);
                 throw new Exception("Error.Http Status: " + response.StatusCode + ".Error Message: " + response.Content);
             }
@@ -120,8 +115,6 @@ namespace FITEvents.Classes
 
 
             IRestResponse response = await client.ExecuteTaskAsync(request);
-
-            //response.StatusCode
         }
     }
 }

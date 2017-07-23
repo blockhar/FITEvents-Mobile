@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-//using System.Reflection.Emit;
 using System.Text;
 using FITEvents.Classes;
 using FITEvents.ItemPages;
@@ -40,9 +39,7 @@ namespace FITEvents.ExecutionPages
 
         public executionDayView()
         {
-            //Cache.taskList = Task.GetAllTasks("delID123");
             
-
             Label header = new Label
             {
                 Text = "Event Execution - " + Globals.ActiveEvent.eventName,
@@ -74,32 +71,18 @@ namespace FITEvents.ExecutionPages
             }
 
             spinner = new ActivityIndicator();
-            // Create the ListView.
+            
             ListView listView = new ListView
             {
-                // Source of data items.
-
+                
                 ItemsSource = groupedWithTitleProperty,
                 HasUnevenRows = true,
 
-                // Define template for displaying each item.
-                // (Argument of DataTemplate constructor is called for 
-                //      each item; it must return a Cell derivative.)
                 ItemTemplate = new DataTemplate(() =>
                 {
-                    // Create views with bindings for displaying each property.
-                    //Label nameLabel = new Label();
-                    //nameLabel.SetBinding(Label.TextProperty, "name");
-                    //nameLabel.SetBinding(Label.HorizontalOptionsProperty, "Hor");
-
+                    
                     Label dueLabel = new Label();
                     dueLabel.SetBinding(Label.TextProperty, "dueDateGroup");
-
-                    //Label dueGroupLabel = new Label();
-                    //dueGroupLabel.SetBinding(Label.TextProperty, "dueDateGroup", BindingMode.Default, null, stringFormat: "Due Group: {0:}");
-
-                    //Label assignedToLabel = new Label();
-                    //assignedToLabel.SetBinding(Label.TextProperty, "assignedToName", BindingMode.Default, null, stringFormat: "Assigned To: {0:}");
 
                     StackLayout myView = new StackLayout
                     {
@@ -118,9 +101,6 @@ namespace FITEvents.ExecutionPages
                     };
 
 
-                    //myView.SetBinding(BackgroundColorProperty, "bgColor");
-
-                    // Return an assembled ViewCell.
                     return new ViewCell
                     {
                         View = myView
@@ -144,7 +124,6 @@ namespace FITEvents.ExecutionPages
             }
             this.Padding = new Thickness(10, top, 10, 5);
 
-            // Build the page.
             this.Content = new StackLayout
             {
                 Children =
@@ -174,7 +153,7 @@ namespace FITEvents.ExecutionPages
             Navigation.PushModalAsync(new executionTaskView(taskList));
             spinner.IsVisible = false;
             spinner.IsRunning = false;
-            ((ListView)sender).SelectedItem = null; //uncomment line if you want to disable the visual selection state.
+            ((ListView)sender).SelectedItem = null; 
         }
     }
 }

@@ -51,8 +51,6 @@ namespace FITEvents.Classes
 
 
             IRestResponse response = await client.ExecuteTaskAsync(request);
-
-            //response.StatusCode
         }
 
         public async Task<Task> Create()
@@ -70,7 +68,6 @@ namespace FITEvents.Classes
             Task task = JsonConvert.DeserializeObject<Task>(response.Content);
 
             return task;
-            //response.StatusCode
         }
         static public async Task<Task> GetTask(string taskID)
         {
@@ -105,7 +102,6 @@ namespace FITEvents.Classes
 
         }
 
-        //GetAllEventTasks
         static public async Task<List<Task>> GetAllEventTasks(string eventID)
         {
             List<Task> resultsAsList = new List<Task>();
@@ -135,8 +131,6 @@ namespace FITEvents.Classes
 
 
             IRestResponse response = await client.ExecuteTaskAsync(request);
-
-            //response.StatusCode
         }
     }
 }

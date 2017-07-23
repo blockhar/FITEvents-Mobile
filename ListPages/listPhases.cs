@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-//using System.Reflection.Emit;
 using System.Text;
 using FITEvents.Classes;
 using FITEvents.ItemPages;
@@ -28,26 +27,14 @@ namespace FITEvents.ListPages
             listView = new ListView
             {
 
-                // Source of data items.
                 ItemsSource = allPhases,
                 HasUnevenRows = true,
 
-                // Define template for displaying each item.
-                // (Argument of DataTemplate constructor is called for 
-                //      each item; it must return a Cell derivative.)
                 ItemTemplate = new DataTemplate(() =>
                 {
-                    // Create views with bindings for displaying each property.
                     Label nameLabel = new Label();
                     nameLabel.SetBinding(Label.TextProperty, "phaseName");
 
-                    //Label orderLabel = new Label();
-                    //orderLabel.SetBinding(Label.TextProperty, "phaseOrder");
-
-                    //Label dueDateLabel = new Label();
-                    //dueDateLabel.SetBinding(Label.TextProperty, "eventDate");
-
-                    // Return an assembled ViewCell.
                     return new ViewCell
                     {
                         View = new StackLayout

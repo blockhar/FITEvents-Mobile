@@ -39,8 +39,7 @@ namespace FITEvents.Classes
 
 
             IRestResponse response = await client.ExecuteTaskAsync(request);
-
-            //response.StatusCode
+            
         }
 
         public async Task<User> Create()
@@ -120,8 +119,7 @@ namespace FITEvents.Classes
 
 
             IRestResponse response = await client.ExecuteTaskAsync(request);
-
-            //response.StatusCode
+            
         }
     }
 }

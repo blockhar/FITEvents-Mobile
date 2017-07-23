@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-//using System.Reflection.Emit;
 using System.Threading;
 using System.Text;
 using FITEvents.Classes;
@@ -80,32 +79,23 @@ namespace FITEvents.ExecutionPages
                 groupedWithTitleProperty.Add(group);
             }   
 
-            // Create the ListView.
+            
             ListView listView = new ListView
             {
-                // Source of data items.
                 
                 ItemsSource = groupedWithTitleProperty,
                 HasUnevenRows = true,
                 IsGroupingEnabled = true,
                 GroupDisplayBinding = new Binding("dueDateGroup"),
 
-                // Define template for displaying each item.
-                // (Argument of DataTemplate constructor is called for 
-                //      each item; it must return a Cell derivative.)
                 ItemTemplate = new DataTemplate(() =>
                 {
-                    // Create views with bindings for displaying each property.
                     Label nameLabel = new Label();
                     nameLabel.SetBinding(Label.TextProperty, "name");
-                    //nameLabel.SetBinding(Label.HorizontalOptionsProperty, "Hor");
-
+                    
                     Label dueLabel = new Label();
                     dueLabel.SetBinding(Label.TextProperty, "dueDate", BindingMode.Default, null, stringFormat: "Due: {0:}");
-
-                    //Label dueGroupLabel = new Label();
-                    //dueGroupLabel.SetBinding(Label.TextProperty, "dueDateGroup", BindingMode.Default, null, stringFormat: "Due Group: {0:}");
-
+                 
                     Label assignedToLabel = new Label();
                     assignedToLabel.SetBinding(Label.TextProperty, "assignedToName", BindingMode.Default, null, stringFormat: "Assigned To: {0:}");
 
@@ -119,7 +109,6 @@ namespace FITEvents.ExecutionPages
                         Children =
                         {
                             nameLabel,
-                            //dueGroupLabel,
                             dueLabel,
                             assignedToLabel
                         }
@@ -130,7 +119,6 @@ namespace FITEvents.ExecutionPages
                     
                     myView.SetBinding(BackgroundColorProperty, "bgColor");
                     
-                    // Return an assembled ViewCell.
                     return new ViewCell
                     {
                         View = myView  
@@ -152,7 +140,6 @@ namespace FITEvents.ExecutionPages
             }
             this.Padding = new Thickness(10, top, 10, 5);
 
-            // Build the page.
             this.Content = new StackLayout
             {
                 Children =

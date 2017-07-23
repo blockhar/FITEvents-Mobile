@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-//using System.Reflection.Emit;
 using System.Text;
 using FITEvents.Classes;
 using FITEvents.ItemPages;
@@ -29,21 +28,14 @@ namespace FITEvents.ModalPages
             listView = new ListView
             {
 
-                // Source of data items.
                 ItemsSource = allTeams,
                 HasUnevenRows = true,
 
-                // Define template for displaying each item.
-                // (Argument of DataTemplate constructor is called for 
-                //      each item; it must return a Cell derivative.)
                 ItemTemplate = new DataTemplate(() =>
                 {
-                    // Create views with bindings for displaying each property
-
                     Label teamLabel = new Label();
                     teamLabel.SetBinding(Label.TextProperty, "teamName");
 
-                    // Return an assembled ViewCell.
                     return new ViewCell
                     {
                         View = new StackLayout

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-//using System.Reflection.Emit;
 using System.Text;
 using FITEvents.Classes;
 using FITEvents.ItemPages;
@@ -23,8 +22,7 @@ namespace FITEvents.ModalPages
         {
             taskPage = _taskPage;
             updateField = _updateField;
-            //taskPage.OnCompletedByClicked();
-
+            
             btnNewTeamMember = new Button { Text = "Create New TeamMember" };
             btnNewTeamMember.Clicked += OnbtnNewTeamMemberClick;
             spinner = new ActivityIndicator();
@@ -32,16 +30,11 @@ namespace FITEvents.ModalPages
             listView = new ListView
             {
 
-                // Source of data items.
                 ItemsSource = allTeamMembers,
                 HasUnevenRows = true,
 
-                // Define template for displaying each item.
-                // (Argument of DataTemplate constructor is called for 
-                //      each item; it must return a Cell derivative.)
                 ItemTemplate = new DataTemplate(() =>
                 {
-                    // Create views with bindings for displaying each property.
                     Label nameLabel = new Label();
                     nameLabel.SetBinding(Label.TextProperty, "teamMemberName");
 
@@ -51,7 +44,6 @@ namespace FITEvents.ModalPages
                     Label teamLabel = new Label();
                     teamLabel.SetBinding(Label.TextProperty, "teamName");
 
-                    // Return an assembled ViewCell.
                     return new ViewCell
                     {
                         View = new StackLayout

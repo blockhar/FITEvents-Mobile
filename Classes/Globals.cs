@@ -15,8 +15,6 @@ namespace FITEvents.Classes
 
         static public string BearerCode;
 
-        //static public string loggedInEmail;
-
         static public User loggedInUser;
     }
     

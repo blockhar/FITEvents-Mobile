@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-//using System.Reflection.Emit;
 using System.Text;
 using FITEvents.Classes;
 using FITEvents.ItemPages;
@@ -27,17 +26,12 @@ namespace FITEvents.ModalPages
             listView = new ListView
             {
 
-                // Source of data items.
                 ItemsSource = allTeamMembers,
                 HasUnevenRows = true,
 
 
-                // Define template for displaying each item.
-                // (Argument of DataTemplate constructor is called for 
-                //      each item; it must return a Cell derivative.)
                 ItemTemplate = new DataTemplate(() =>
                 {
-                    // Create views with bindings for displaying each property.
                     Label nameLabel = new Label();
                     nameLabel.SetBinding(Label.TextProperty, "teamMemberName");
 
@@ -46,7 +40,6 @@ namespace FITEvents.ModalPages
                     Label emailLabel = new Label();
                     emailLabel.SetBinding(Label.TextProperty, "teamMemberEmail");
 
-                    // Return an assembled ViewCell.
                     return new ViewCell
                     {
                         View = new StackLayout
@@ -91,7 +84,7 @@ namespace FITEvents.ModalPages
             newTeamMember.teamMemberID = selectedTeamMember.teamMemberID;
             newTeamMember.Create();
 
-            ((ListView)sender).SelectedItem = null; //uncomment line if you want to disable the visual selection state.
+            ((ListView)sender).SelectedItem = null; 
             spinner.IsRunning = false;
             spinner.IsVisible = false;
         }

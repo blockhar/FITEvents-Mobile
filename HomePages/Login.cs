@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-//using System.Reflection.Emit;
 using System.Text;
 using RestSharp;
 using Xamarin.Forms;
@@ -95,7 +94,6 @@ namespace FITEvents.HomePages
 
             IRestResponse response = await client.ExecuteTaskAsync(request);
 
-            //lblResponse.Text = response.Content.ToString();
             Log.Info("FITEVENTS", "Successful Login");
 
             if ((int)response.StatusCode == 200)

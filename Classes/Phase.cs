@@ -40,8 +40,6 @@ namespace FITEvents.Classes
 
 
             IRestResponse response = await client.ExecuteTaskAsync(request);
-
-            //response.StatusCode
         }
 
         public async Task<Phase> Create()
@@ -58,7 +56,6 @@ namespace FITEvents.Classes
 
             Phase phase = JsonConvert.DeserializeObject<Phase>(response.Content);
             return phase;
-            //response.StatusCode
         }
         static public async Task<Phase> GetPhase(string phaseID)
         {
@@ -104,8 +101,6 @@ namespace FITEvents.Classes
 
 
             IRestResponse response = await client.ExecuteTaskAsync(request);
-
-            //response.StatusCode
         }
     }
 }

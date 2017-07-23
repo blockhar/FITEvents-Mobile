@@ -39,8 +39,6 @@ namespace FITEvents.Classes
 
 
             IRestResponse response = await client.ExecuteTaskAsync(request);
-
-            //response.StatusCode
         }
 
         public async Task<Team> Create()
@@ -60,7 +58,6 @@ namespace FITEvents.Classes
 
             Team team = JsonConvert.DeserializeObject<Team>(response.Content);
             return team;
-            //response.StatusCode
         }
 
         static public async Task<Team> GetTeam(string teamID)
@@ -107,8 +104,6 @@ namespace FITEvents.Classes
 
 
             IRestResponse response = await client.ExecuteTaskAsync(request);
-
-            //response.StatusCode
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-//using System.Reflection.Emit;
 using System.Text;
 using FITEvents.Classes;
 using FITEvents.ItemPages;
@@ -26,17 +25,12 @@ namespace FITEvents.ListPages
             listView = new ListView
             {
                 
-                // Source of data items.
                 ItemsSource = allTasks,
                 HasUnevenRows = true,
                 
 
-                // Define template for displaying each item.
-                // (Argument of DataTemplate constructor is called for 
-                //      each item; it must return a Cell derivative.)
                 ItemTemplate = new DataTemplate(() =>
                 {
-                    // Create views with bindings for displaying each property.
                     Label nameLabel = new Label();
                     nameLabel.SetBinding(Label.TextProperty, "taskName");
 
@@ -46,7 +40,6 @@ namespace FITEvents.ListPages
                     Label dueDateLabel = new Label();
                     dueDateLabel.SetBinding(Label.TextProperty, "dueDateLocal");
 
-                    // Return an assembled ViewCell.
                     return new ViewCell
                     {
                         View = new StackLayout
@@ -87,7 +80,7 @@ namespace FITEvents.ListPages
             Task selectedTask = (Task)e.SelectedItem;
             Navigation.PushModalAsync(new TaskDetails(selectedTask));
 
-            ((ListView)sender).SelectedItem = null; //uncomment line if you want to disable the visual selection state.
+            ((ListView)sender).SelectedItem = null; 
             spinner.IsRunning = false;
             spinner.IsVisible = false;
         }

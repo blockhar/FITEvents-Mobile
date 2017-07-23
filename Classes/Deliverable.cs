@@ -51,8 +51,6 @@ namespace FITEvents.Classes
 
 
             IRestResponse response = await client.ExecuteTaskAsync(request);
-
-            //response.StatusCode
         }
 
         public async Task<Deliverable> Create()
@@ -69,7 +67,6 @@ namespace FITEvents.Classes
 
             Deliverable deliverable = JsonConvert.DeserializeObject<Deliverable>(response.Content);
             return deliverable;
-            //response.StatusCode
         }
         static public async Task<Deliverable> GetDeliverable(string deliverableID)
         {
@@ -115,8 +112,6 @@ namespace FITEvents.Classes
 
 
             IRestResponse response = await client.ExecuteTaskAsync(request);
-
-            //response.StatusCode
         }
     }
 }
