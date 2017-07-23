@@ -20,6 +20,7 @@ namespace FITEvents.ExecutionPages
             public DateTime dueDateGroup { get; set; }
             public string assignedToName { get; set; }
             public Color bgColor { get; set; }
+            public string status { get; set; }
 
             public TaskCell(Task _task)
             {
@@ -31,10 +32,12 @@ namespace FITEvents.ExecutionPages
                 if (String.IsNullOrEmpty(_task.completedBy))
                 {
                     bgColor = Color.White;
+                    status = "Not Completed";
                 }
                 else
                 {
                     bgColor = Color.Green;
+                    status = "Not Completed";
                 }
 
             }
@@ -99,6 +102,9 @@ namespace FITEvents.ExecutionPages
                     Label assignedToLabel = new Label();
                     assignedToLabel.SetBinding(Label.TextProperty, "assignedToName", BindingMode.Default, null, stringFormat: "Assigned To: {0:}");
 
+                    Label statusLabel = new Label();
+                    statusLabel.SetBinding(Label.TextProperty, "status", BindingMode.Default, null, stringFormat: "Status: {0:}");
+
                     StackLayout myView = new StackLayout
                     {
 
@@ -110,7 +116,8 @@ namespace FITEvents.ExecutionPages
                         {
                             nameLabel,
                             dueLabel,
-                            assignedToLabel
+                            assignedToLabel,
+                            statusLabel
                         }
 
                                         
