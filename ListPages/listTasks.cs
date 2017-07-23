@@ -14,12 +14,14 @@ namespace FITEvents.ListPages
         ListView listView;
         Button btnNewTask;
         Deliverable deliverable;
+        ActivityIndicator spinner;
 
         public listTasks (List<Task> allTasks, Deliverable _deliverable)
 		{
             deliverable = _deliverable;
             btnNewTask = new Button { Text = "Create New Task" };
             btnNewTask.Clicked += OnbtnNewTaskClick;
+            spinner = new ActivityIndicator();
 
             listView = new ListView
             {
@@ -68,7 +70,8 @@ namespace FITEvents.ListPages
 				Children =
                 {
                     btnNewTask,
-                    listView
+                    listView,
+                    spinner
                 }
 			};
 		}
@@ -79,19 +82,26 @@ namespace FITEvents.ListPages
             {
                 return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
             }
-
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
             Task selectedTask = (Task)e.SelectedItem;
             Navigation.PushModalAsync(new TaskDetails(selectedTask));
 
             ((ListView)sender).SelectedItem = null; //uncomment line if you want to disable the visual selection state.
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
         }
 
         private void OnbtnNewTaskClick(object sender, EventArgs e)
         {
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
             Task newtask = new Task();
             newtask.deliverableID = deliverable.deliverableID;
             newtask.deliverableName = deliverable.deliverableName;
             Navigation.PushModalAsync(new TaskDetails(newtask));
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
         }
     }
 }

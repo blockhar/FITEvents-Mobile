@@ -16,12 +16,14 @@ namespace FITEvents.ListPages
         ListView listView;
         Button btnNewDeliverable;
         Phase phase;
+        ActivityIndicator spinner;
 
         public listDeliverables(List<Deliverable> allDeliverables, Phase _phase)
         {
             phase = _phase;
             btnNewDeliverable = new Button { Text = "Create New Deliverable" };
             btnNewDeliverable.Clicked += OnbtnNewDeliverableClick;
+            spinner = new ActivityIndicator();
 
             listView = new ListView
             {
@@ -70,30 +72,40 @@ namespace FITEvents.ListPages
                 Children =
                 {
                     btnNewDeliverable,
-                    listView
+                    listView,
+                    spinner
                 }
             };
         }
 
         void OnSelection(object sender, SelectedItemChangedEventArgs e)
         {
+            
             if (e.SelectedItem == null)
             {
                 return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
             }
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
 
             Deliverable selectedDeliverable = (Deliverable)e.SelectedItem;
             Navigation.PushModalAsync(new DeliverableDetails(selectedDeliverable));
             ((ListView)sender).SelectedItem = null;
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
 
         }
 
         void OnbtnNewDeliverableClick(object sender, EventArgs e)
         {
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
             Deliverable newDeliverable = new Deliverable();
             newDeliverable.phaseID = phase.phaseID;
             newDeliverable.phaseName = phase.phaseName;
             Navigation.PushModalAsync(new DeliverableDetails(newDeliverable));
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
         }
     }
 }

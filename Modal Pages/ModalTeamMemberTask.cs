@@ -17,6 +17,7 @@ namespace FITEvents.ModalPages
         Button btnNewTeamMember;
         TaskDetails taskPage;
         String updateField;
+        ActivityIndicator spinner;
 
         public ModalTeamMember(TaskDetails _taskPage, List<TeamMember> allTeamMembers, String _updateField)
         {
@@ -26,6 +27,7 @@ namespace FITEvents.ModalPages
 
             btnNewTeamMember = new Button { Text = "Create New TeamMember" };
             btnNewTeamMember.Clicked += OnbtnNewTeamMemberClick;
+            spinner = new ActivityIndicator();
 
             listView = new ListView
             {
@@ -74,7 +76,8 @@ namespace FITEvents.ModalPages
                 Children =
                 {
                     btnNewTeamMember,
-                    listView
+                    listView,
+                    spinner
                 }
             };
         }
@@ -85,7 +88,8 @@ namespace FITEvents.ModalPages
             {
                 return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
             }
-
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
             TeamMember selectedTeamMember = (TeamMember)e.SelectedItem;
             if (updateField == "assignedTo")
             {
@@ -97,7 +101,8 @@ namespace FITEvents.ModalPages
             }
             
             Navigation.PopModalAsync();
-
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
         }
 
         void OnbtnNewTeamMemberClick(object sender, EventArgs e)

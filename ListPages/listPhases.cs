@@ -16,12 +16,14 @@ namespace FITEvents.ListPages
         ListView listView;
         Button btnNewPhase;
         Event myEvent;
+        ActivityIndicator spinner;
 
         public listPhases(List<Phase> allPhases, Event _myEvent)
         {
             myEvent = _myEvent;
             btnNewPhase = new Button { Text = "Create New Phase" };
             btnNewPhase.Clicked += OnbtnNewPhaseClick;
+            spinner = new ActivityIndicator();
 
             listView = new ListView
             {
@@ -68,7 +70,8 @@ namespace FITEvents.ListPages
                 Children =
                 {
                     btnNewPhase,
-                    listView
+                    listView,
+                    spinner
                 }
             };
         }
@@ -79,19 +82,25 @@ namespace FITEvents.ListPages
             {
                 return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
             }
-
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
             Phase selectedPhase = (Phase)e.SelectedItem;
             Navigation.PushModalAsync(new PhaseDetails(selectedPhase));
             ((ListView)sender).SelectedItem = null;
-
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
         }
 
         void OnbtnNewPhaseClick(object sender, EventArgs e)
         {
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
             Phase newPhase = new Phase();
             newPhase.eventID = myEvent.eventID;
             newPhase.eventName = myEvent.eventName;
             Navigation.PushModalAsync(new PhaseDetails(newPhase));
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
         }
     }
 }

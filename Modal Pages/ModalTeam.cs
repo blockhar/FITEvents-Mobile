@@ -16,6 +16,7 @@ namespace FITEvents.ModalPages
         ListView listView;
         Button btnNewTeam;
         DeliverableDetails deliverablePage;
+        ActivityIndicator spinner;
 
         public ModalTeam(DeliverableDetails _deliverablePage, List<Team> allTeams)
         {
@@ -23,6 +24,7 @@ namespace FITEvents.ModalPages
 
             btnNewTeam = new Button { Text = "Create New Team" };
             btnNewTeam.Clicked += OnbtnNewTeamClick;
+            spinner = new ActivityIndicator();
 
             listView = new ListView
             {
@@ -64,7 +66,8 @@ namespace FITEvents.ModalPages
                 Children =
                 {
                     btnNewTeam,
-                    listView
+                    listView,
+                    spinner
                 }
             };
         }
@@ -75,19 +78,26 @@ namespace FITEvents.ModalPages
             {
                 return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
             }
-
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
             Team selectedTeam = (Team)e.SelectedItem;
             deliverablePage.updateTeam(selectedTeam);
             Navigation.PopModalAsync();
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
 
         }
 
         void OnbtnNewTeamClick(object sender, EventArgs e)
         {
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
             Team newTeam = new Team();
             newTeam.eventID = Globals.ActiveEvent.eventID;
             newTeam.eventName = Globals.ActiveEvent.eventName;
             Navigation.PushModalAsync(new TeamDetails(newTeam)); ;
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
         }
     }
 }

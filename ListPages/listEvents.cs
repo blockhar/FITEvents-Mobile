@@ -16,11 +16,13 @@ namespace FITEvents.ListPages
         
         ListView listView;
         Button btnNewEvent;
+        ActivityIndicator spinner;
 
         public listEvents(List<Event> allEvents = null)
         {
             btnNewEvent = new Button { Text = "Create New Event" };
             btnNewEvent.Clicked += OnbtnNewEventClick;
+            spinner = new ActivityIndicator();
 
             listView = new ListView
             {
@@ -69,7 +71,8 @@ namespace FITEvents.ListPages
                 Children =
                 {
                     btnNewEvent,
-                    listView
+                    listView,
+                    spinner
                 }
             };
         }
@@ -80,12 +83,16 @@ namespace FITEvents.ListPages
             {
                 return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
             }
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
 
             Event selectedEvent = (Event)e.SelectedItem;
             Globals.ActiveEvent = selectedEvent;
             Navigation.PushModalAsync(new EventHome(selectedEvent));
 
             ((ListView)sender).SelectedItem = null; //uncomment line if you want to disable the visual selection state.
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
         }
 
         void OnbtnNewEventClick(object sender, EventArgs e)

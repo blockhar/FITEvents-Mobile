@@ -15,12 +15,14 @@ namespace FITEvents.ListPages
         ListView listView;
         Button btnNewTeamMember;
         Team team;
+        ActivityIndicator spinner;
 
         public listTeamMembers(List<TeamMember> allTeamMembers, Team _team)
         {
             team = _team;
             btnNewTeamMember = new Button { Text = "Add TeamMember" };
             btnNewTeamMember.Clicked += OnbtnNewTeamMemberClick;
+            spinner = new ActivityIndicator();
 
             listView = new ListView
             {
@@ -70,7 +72,8 @@ namespace FITEvents.ListPages
                 Children =
                 {
                     btnNewTeamMember,
-                    listView
+                    listView,
+                    spinner
                 }
             };
         }
@@ -81,17 +84,24 @@ namespace FITEvents.ListPages
             {
                 return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
             }
-
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
             TeamMember selectedTeamMember = (TeamMember)e.SelectedItem;
             //Navigation.PushModalAsync(new TeamMemberDetails(selectedTeamMember));
 
             ((ListView)sender).SelectedItem = null; //uncomment line if you want to disable the visual selection state.
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
         }
 
         private async void OnbtnNewTeamMemberClick(object sender, EventArgs e)
         {
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
             List<TeamMember> allTeamMembers = await TeamMember.GetAllEventTeamMembers(Globals.ActiveEvent.eventID);
             await Navigation.PushModalAsync(new ModalEventMembers(allTeamMembers, team));
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
         }
     }
 }

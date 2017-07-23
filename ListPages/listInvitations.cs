@@ -14,10 +14,11 @@ namespace FITEvents.ListPages
     {
 
         ListView listView;
+        ActivityIndicator spinner;
 
         public listInvitations(List<TeamInvitation> allInvites)
         {
-
+            spinner = new ActivityIndicator();
             listView = new ListView
             {
 
@@ -60,7 +61,8 @@ namespace FITEvents.ListPages
             {
                 Children =
                 {
-                    listView
+                    listView,
+                    spinner
                 }
             };
         }
@@ -71,10 +73,13 @@ namespace FITEvents.ListPages
             {
                 return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
             }
-
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
             TeamInvitation selectedInvite = (TeamInvitation)e.SelectedItem;
             Navigation.PushModalAsync(new InvitationDetails(selectedInvite));
             ((ListView)sender).SelectedItem = null;
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
 
         }
     }
