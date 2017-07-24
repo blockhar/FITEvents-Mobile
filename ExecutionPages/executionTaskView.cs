@@ -89,7 +89,7 @@ namespace FITEvents.ExecutionPages
                 ItemsSource = groupedWithTitleProperty,
                 HasUnevenRows = true,
                 IsGroupingEnabled = true,
-                GroupDisplayBinding = new Binding("dueDateGroup"),
+                GroupDisplayBinding = new Binding("dueDateGroup", BindingMode.Default, null, stringFormat: "{0:t}"),
 
                 ItemTemplate = new DataTemplate(() =>
                 {
@@ -97,7 +97,7 @@ namespace FITEvents.ExecutionPages
                     nameLabel.SetBinding(Label.TextProperty, "name");
                     
                     Label dueLabel = new Label();
-                    dueLabel.SetBinding(Label.TextProperty, "dueDate", BindingMode.Default, null, stringFormat: "Due: {0:}");
+                    dueLabel.SetBinding(Label.TextProperty, "dueDate", BindingMode.Default, null, stringFormat: "Due: {0:t}");
                  
                     Label assignedToLabel = new Label();
                     assignedToLabel.SetBinding(Label.TextProperty, "assignedToName", BindingMode.Default, null, stringFormat: "Assigned To: {0:}");

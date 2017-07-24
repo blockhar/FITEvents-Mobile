@@ -82,7 +82,7 @@ namespace FITEvents.ExecutionPages
                 {
                     
                     Label dueLabel = new Label();
-                    dueLabel.SetBinding(Label.TextProperty, "dueDateGroup");
+                    dueLabel.SetBinding(Label.TextProperty, "dueDateGroup", BindingMode.Default, null, stringFormat: "{0:d}");
 
                     StackLayout myView = new StackLayout
                     {
