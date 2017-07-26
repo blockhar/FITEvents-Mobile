@@ -35,7 +35,7 @@ namespace FITEvents.ListPages
                     nameLabel.SetBinding(Label.TextProperty, "eventName");
 
                     Label locationLabel = new Label();
-                    locationLabel.SetBinding(Label.TextProperty, "eventLocatiton");
+                    locationLabel.SetBinding(Label.TextProperty, "eventLocation");
 
                     Label dueDateLabel = new Label();
                     dueDateLabel.SetBinding(Label.TextProperty, "eventDate");
