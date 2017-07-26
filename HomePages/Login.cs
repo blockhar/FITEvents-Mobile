@@ -161,7 +161,8 @@ namespace FITEvents.HomePages
                 JObject responeObject = JObject.Parse(responseText);
                 string id_token = (string)responeObject["id_token"];
                 Globals.BearerCode = id_token;
-                Log.Info("FITEVENTS", "Try Get LoggedInUser");                                
+                Log.Info("FITEVENTS", "Try Get LoggedInUser");
+                entPassword.Text = "";                                
             }
 
             else
