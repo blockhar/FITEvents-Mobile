@@ -43,6 +43,7 @@ namespace FITEvents.HomePages
 
             this.Content = new StackLayout
             {
+                VerticalOptions = LayoutOptions.Center,
                 Children = {
                     btnProfile,
                     btnEvents,

@@ -40,6 +40,7 @@ namespace FITEvents.HomePages
             spinner = new ActivityIndicator();
             this.Content = new StackLayout
             {
+                VerticalOptions = LayoutOptions.Center,
                 Children = {
                     btnEventExecution,
                     btnEventManagement,
