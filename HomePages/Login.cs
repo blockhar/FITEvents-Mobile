@@ -131,14 +131,14 @@ namespace FITEvents.HomePages
         {
             spinner.IsVisible = true;
             spinner.IsRunning = true;
-            TryLogin();
+            await TryLogin();
             Globals.loggedInUser = await User.GetLoggedInUser();
             await Navigation.PushModalAsync(new Home());
             spinner.IsVisible = false;
             spinner.IsRunning = false;
         }
 
-        async void TryLogin()
+        async System.Threading.Tasks.Task TryLogin()
         {
             string username = entUsername.Text.ToLower();
             string password = entPassword.Text;
