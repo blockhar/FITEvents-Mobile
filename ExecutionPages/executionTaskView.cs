@@ -37,7 +37,7 @@ namespace FITEvents.ExecutionPages
                 else
                 {
                     bgColor = Color.Green;
-                    status = "Not Completed";
+                    status = "Completed";
                 }
 
             }
