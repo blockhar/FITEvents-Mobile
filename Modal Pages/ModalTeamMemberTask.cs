@@ -14,6 +14,7 @@ namespace FITEvents.ModalPages
 
         ListView listView;
         Button btnNewTeamMember;
+        Button btnClear;
         TaskDetails taskPage;
         String updateField;
         ActivityIndicator spinner;
@@ -25,6 +26,8 @@ namespace FITEvents.ModalPages
             
             btnNewTeamMember = new Button { Text = "Create New TeamMember" };
             btnNewTeamMember.Clicked += OnbtnNewTeamMemberClick;
+            btnClear = new Button { Text = "Clear" };
+            btnClear.Clicked += OnbtnClearClick;
             spinner = new ActivityIndicator();
 
             listView = new ListView
@@ -68,6 +71,7 @@ namespace FITEvents.ModalPages
                 Children =
                 {
                     btnNewTeamMember,
+                    btnClear,
                     listView,
                     spinner
                 }
@@ -96,6 +100,25 @@ namespace FITEvents.ModalPages
             spinner.IsRunning = false;
             spinner.IsVisible = false;
         }
+        void OnbtnClearClick(object sender, EventArgs e)
+        {
+            spinner.IsRunning = true;
+            spinner.IsVisible = true;
+            if (updateField == "assignedTo")
+            {
+                taskPage.clearAssignedTo();
+            }
+            else if (updateField == "completedBy")
+            {
+                taskPage.clearCompletedBy();
+            }
+
+            Navigation.PopModalAsync();
+            spinner.IsRunning = false;
+            spinner.IsVisible = false;
+        }
+        
+
 
         void OnbtnNewTeamMemberClick(object sender, EventArgs e)
         {

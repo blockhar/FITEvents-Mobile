@@ -153,5 +153,19 @@ namespace FITEvents.ItemPages
             task.completedByName = completedBy.teamMemberName;
             btncompletedBy.Text = task.completedByName;
         }
+
+        public void clearAssignedTo()
+        {
+            task.assignedTo = null;
+            task.assignedToName = null;
+            btnassignedTo.Text = "";
+        }
+
+        public void clearCompletedBy()
+        {
+            task.completedBy = null;
+            task.completedByName = null;
+            btncompletedBy.Text = "";
+        }
     }
 }
