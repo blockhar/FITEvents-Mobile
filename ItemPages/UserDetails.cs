@@ -18,7 +18,7 @@ namespace FITEvents.ItemPages
         Entry entUserEmail;
         Button btnSave;
         Button btnSaveClose;
-        Button btnDelete;
+        //Button btnDelete;
         ActivityIndicator spinner;
 
         User user;
@@ -39,8 +39,8 @@ namespace FITEvents.ItemPages
             btnSaveClose.Clicked += Close;
             btnSave = new Button { Text = "Save" };
             btnSave.Clicked += Save;
-            btnDelete = new Button { Text = "Delete" };
-            btnDelete.Clicked += OnbtnDeleteClick;
+            //btnDelete = new Button { Text = "Delete" };
+            //btnDelete.Clicked += OnbtnDeleteClick;
             spinner = new ActivityIndicator();
 
             StackLayout stack = new StackLayout
@@ -54,7 +54,7 @@ namespace FITEvents.ItemPages
                     entUserEmail,
                     btnSaveClose,
                     btnSave,
-                    btnDelete,
+                    //btnDelete,
                     spinner
                 }
             };
@@ -84,15 +84,15 @@ namespace FITEvents.ItemPages
             spinner.IsRunning = false;
         }
 
-        void OnbtnDeleteClick(object sender, EventArgs e)
-        {
-            spinner.IsVisible = true;
-            spinner.IsRunning = true;
-            user.Delete();
-            Navigation.PopModalAsync();
-            spinner.IsVisible = false;
-            spinner.IsRunning = false;
-        }
+        //void OnbtnDeleteClick(object sender, EventArgs e)
+        //{
+        //    spinner.IsVisible = true;
+        //    spinner.IsRunning = true;
+        //    user.Delete();
+        //    Navigation.PopModalAsync();
+        //    spinner.IsVisible = false;
+        //    spinner.IsRunning = false;
+        //}
 
         void Close(object sender, EventArgs e)
         {

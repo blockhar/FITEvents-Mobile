@@ -108,18 +108,18 @@ namespace FITEvents.Classes
 
         }
 
-        public async void Delete()
-        {
-            var client = Globals.client;
-            var request = new RestRequest("api/user", Method.DELETE);
+        //public async void Delete()
+        //{
+        //    var client = Globals.client;
+        //    var request = new RestRequest("api/user", Method.DELETE);
 
-            request.AddHeader("Content-Type", "application/json");
-            request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
-            request.AddJsonBody(this);
+        //    request.AddHeader("Content-Type", "application/json");
+        //    request.AddHeader("Authorization", "Bearer " + Globals.BearerCode);
+        //    request.AddJsonBody(this);
 
 
-            IRestResponse response = await client.ExecuteTaskAsync(request);
+        //    IRestResponse response = await client.ExecuteTaskAsync(request);
             
-        }
+        //}
     }
 }
