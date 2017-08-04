@@ -24,6 +24,8 @@ namespace FITEvents.ItemPages
 
         public TeamDetails(Team _team)
         {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             team = _team;
 
             btnMembers = new Button { Text = "See Team Members" };

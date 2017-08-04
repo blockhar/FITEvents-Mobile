@@ -18,6 +18,8 @@ namespace FITEvents.ListPages
 
         public listInvitations()
         {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             spinner = new ActivityIndicator();
             listView = new ListView
             {

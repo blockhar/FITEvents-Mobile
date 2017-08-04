@@ -23,6 +23,8 @@ namespace FITEvents.ItemPages
 
         public InvitationDetails(TeamInvitation _invitation)
         {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             teaminvitation = _invitation;
 
             lblTeamName = new Label { Text = teaminvitation.teamName };

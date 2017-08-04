@@ -25,6 +25,8 @@ namespace FITEvents.ItemPages
 
         public UserDetails(User _user)
         {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             user = _user;
 
             lblUserName = new Label { Text = "Name" };

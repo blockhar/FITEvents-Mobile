@@ -50,6 +50,8 @@ namespace FITEvents.ExecutionPages
 
         public executionTaskView(List<Task> taskList)
         {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             Label header = new Label
             {
                 Text = "Event Execution - " + Globals.ActiveEvent.eventName,

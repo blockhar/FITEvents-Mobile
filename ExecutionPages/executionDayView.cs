@@ -39,7 +39,8 @@ namespace FITEvents.ExecutionPages
 
         public executionDayView()
         {
-            
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             Label header = new Label
             {
                 Text = "Event Execution - " + Globals.ActiveEvent.eventName,

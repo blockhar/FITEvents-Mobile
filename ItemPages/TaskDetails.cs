@@ -31,7 +31,9 @@ namespace FITEvents.ItemPages
         string teamID;
 
         public TaskDetails (Task passedtask, string _teamID)
-		{
+        {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             task = passedtask;
             teamID = _teamID;
 

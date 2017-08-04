@@ -28,6 +28,8 @@ namespace FITEvents.ItemPages
 
         public EventDetails(Event _myEvent)
         {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             myEvent = _myEvent;
 
             btnPhases = new Button { Text = "View Phases" };

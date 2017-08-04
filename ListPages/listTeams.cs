@@ -20,6 +20,8 @@ namespace FITEvents.ListPages
 
         public listTeams(Event _myEvent)
         {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             myEvent = _myEvent;
             btnNewTeam = new Button { Text = "Create New Team" };
             btnNewTeam.Clicked += OnbtnNewTeamClick;

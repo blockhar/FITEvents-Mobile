@@ -19,6 +19,8 @@ namespace FITEvents.ListPages
 
         public listDeliverables(Phase _phase)
         {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             phase = _phase;
             btnNewDeliverable = new Button { Text = "Create New Deliverable" };
             btnNewDeliverable.Clicked += OnbtnNewDeliverableClick;

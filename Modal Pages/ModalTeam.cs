@@ -19,6 +19,8 @@ namespace FITEvents.ModalPages
 
         public ModalTeam(DeliverableDetails _deliverablePage, List<Team> allTeams)
         {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             deliverablePage = _deliverablePage;
 
             btnNewTeam = new Button { Text = "Create New Team" };

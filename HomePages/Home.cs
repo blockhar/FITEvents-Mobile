@@ -21,6 +21,8 @@ namespace FITEvents.HomePages
 
         public Home()
         {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             btnProfile = new Button
             {
                 Text = "My Profile"

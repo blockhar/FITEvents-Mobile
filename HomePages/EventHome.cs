@@ -20,6 +20,8 @@ namespace FITEvents.HomePages
 
         public EventHome(Event _activeEvent)
         {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             activeEvent = _activeEvent;
 
             btnEventExecution = new Button

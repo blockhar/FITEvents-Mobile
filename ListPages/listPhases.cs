@@ -20,6 +20,8 @@ namespace FITEvents.ListPages
 
         public listPhases(Event _myEvent)
         {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             myEvent = _myEvent;
             btnNewPhase = new Button { Text = "Create New Phase" };
             btnNewPhase.Clicked += OnbtnNewPhaseClick;

@@ -19,6 +19,8 @@ namespace FITEvents.ListPages
 
         public listEvents(List<Event> allEvents = null)
         {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             btnNewEvent = new Button { Text = "Create New Event" };
             btnNewEvent.Clicked += OnbtnNewEventClick;
             spinner = new ActivityIndicator();

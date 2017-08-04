@@ -19,6 +19,8 @@ namespace FITEvents.ListPages
 
         public listTeamMembers(Team _team)
         {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             team = _team;
             btnNewTeamMember = new Button { Text = "Add TeamMember" };
             btnNewTeamMember.Clicked += OnbtnNewTeamMemberClick;
