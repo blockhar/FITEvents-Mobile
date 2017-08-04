@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FITEvents.HomePages;
+using FITEvents.Classes;
 
 using Xamarin.Forms;
 
@@ -14,8 +15,14 @@ namespace FITEvents
 		{
 			InitializeComponent();
 
-			MainPage = new NavigationPage(new Login());
-		}
+            //MainPage = new NavigationPage(new Login());
+            MainPage = new Login();
+
+            Resources = new ResourceDictionary();
+            Resources.Add(FITEventStyles.buttonStyle);
+            Resources.Add(FITEventStyles.entryStyle);
+            Resources.Add(FITEventStyles.labelStyle);
+        }
 
 		protected override void OnStart ()
 		{
