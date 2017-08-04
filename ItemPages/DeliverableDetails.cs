@@ -31,7 +31,9 @@ namespace FITEvents.ItemPages
         Deliverable deliverable;
         
         public DeliverableDetails (Deliverable passedDeliverable)
-		{
+        {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             deliverable = passedDeliverable;
 
             btnTasks = new Button { Text = "View Tasks" };

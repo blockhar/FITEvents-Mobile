@@ -18,6 +18,8 @@ namespace FITEvents.ModalPages
 
         public ModalEventMembers(List<TeamMember> allTeamMembers, Team _team)
         {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             team = _team;
             btnNewTeamMember = new Button { Text = "Invite New TeamMember" };
             btnNewTeamMember.Clicked += OnbtnNewTeamMemberClick;

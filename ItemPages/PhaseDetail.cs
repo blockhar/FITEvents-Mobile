@@ -26,6 +26,8 @@ namespace FITEvents.ItemPages
 
         public PhaseDetails(Phase _phase)
         {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             phase = _phase;
 
             btnDeliverables = new Button { Text = "See Deliverables" };

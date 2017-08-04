@@ -17,7 +17,9 @@ namespace FITEvents.ListPages
         List<Task> allTasks;
 
         public listTasks (Deliverable _deliverable)
-		{
+        {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             deliverable = _deliverable;
             btnNewTask = new Button { Text = "Create New Task" };
             btnNewTask.Clicked += OnbtnNewTaskClick;

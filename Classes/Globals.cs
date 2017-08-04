@@ -52,5 +52,15 @@ namespace FITEvents.Classes
                 new Setter {Property = Label.TextColorProperty, Value = Color.FromRgb(241,184,45)}
             }
         };
+
+        static public Style pageStyle = new Style(typeof(ContentPage))
+        {
+            Setters =
+            {
+                new Setter {Property = ContentPage.BackgroundImageProperty, Value = "h960w1600.png"}
+            }
+        };
+
+        static public string GlobalBGImageName = "h960w1600.png";
     }
 }

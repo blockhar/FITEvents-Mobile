@@ -21,6 +21,8 @@ namespace FITEvents.ModalPages
 
         public ModalTeamMember(TaskDetails _taskPage, List<TeamMember> allTeamMembers, String _updateField)
         {
+            this.BackgroundImage = FITEventStyles.GlobalBGImageName;
+
             taskPage = _taskPage;
             updateField = _updateField;
             
