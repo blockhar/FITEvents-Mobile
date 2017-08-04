@@ -24,8 +24,6 @@ namespace FITEvents.ExecutionPages
 
             public TaskCell(Task _task)
             {
-                this.BackgroundImage = FITEventStyles.GlobalBGImageName;
-
                 this.task = _task;
                 this.name = _task.taskName;
                 this.assignedToName = _task.assignedToName;
