@@ -18,7 +18,7 @@ namespace FITEvents.Classes
         public string vendorName { get; set; }
         public string team { get; set; }
         public string teamName { get; set; }
-        public int priority { get; set; }
+        public string priority { get; set; }
         public string notes { get; set; }
 
         public Deliverable()
@@ -26,7 +26,7 @@ namespace FITEvents.Classes
 
         }
 
-        public Deliverable(string _deliverableID, string _phaseID, string _phaseName, string _deliverableName, string _vendorID, string _vendorName, string _team, string _teamName, int _priority, string _notes)
+        public Deliverable(string _deliverableID, string _phaseID, string _phaseName, string _deliverableName, string _vendorID, string _vendorName, string _team, string _teamName, string _priority, string _notes)
         {
             deliverableID = _deliverableID;
             phaseID = _phaseID;
