@@ -61,6 +61,14 @@ namespace FITEvents.Classes
             }
         };
 
+        static public Style pickerStyle = new Style(typeof(Picker))
+        {
+            Setters =
+            {
+                new Setter {Property = Picker.TextColorProperty, Value = Color.White}
+            }
+        };
+
         static public string GlobalBGImageName = "h960w1600.png";
     }
 }

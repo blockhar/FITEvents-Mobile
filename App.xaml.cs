@@ -22,6 +22,7 @@ namespace FITEvents
             Resources.Add(FITEventStyles.buttonStyle);
             Resources.Add(FITEventStyles.entryStyle);
             Resources.Add(FITEventStyles.labelStyle);
+            Resources.Add(FITEventStyles.pickerStyle);
         }
 
 		protected override void OnStart ()

@@ -21,7 +21,7 @@ namespace FITEvents.ItemPages
         Entry entdeliverableName;
         Entry entvendorName;
         Button btnteam;
-        Entry entpriority;
+        Picker pckpriority;
         Entry entnotes;
         Button btnSaveClose;
         Button btnSave;
@@ -45,7 +45,8 @@ namespace FITEvents.ItemPages
             btnteam = new Button { Text = deliverable.teamName };
             btnteam.Clicked += OnTeamBtnClicked;
             lblpriority = new Label { Text = "Priority" };
-            entpriority = new Entry { Text = deliverable.priority.ToString()};
+            pckpriority = new Picker {Title = "Priority"};
+            pckpriority.SelectedIndexChanged += OnpckPriorityChange;
             lblvendorName = new Label { Text = "Vendor" };
             entvendorName = new Entry { Text = deliverable.vendorName };
             lblnotes = new Label { Text = "Notes" };
@@ -59,6 +60,22 @@ namespace FITEvents.ItemPages
             btnDelete.Clicked += OnbtnDeleteClick;
             spinner = new ActivityIndicator();
 
+            //Add priority options to picker
+            pckpriority.Items.Add("High");
+            pckpriority.Items.Add("Low");
+
+            //Set existing value for priority picker
+            if (!String.IsNullOrEmpty(deliverable.priority))
+            {
+                for (int i = 0; i < pckpriority.Items.Count; i++)
+                {
+                    if (pckpriority.Items[i] == deliverable.priority)
+                    {
+                        pckpriority.SelectedIndex = i;
+                    }
+                }
+            }
+
             StackLayout stack = new StackLayout {
                 Children = {
                     btnTasks,
@@ -68,7 +85,7 @@ namespace FITEvents.ItemPages
                     lblteam,
                     btnteam,
                     lblpriority,
-                    entpriority,
+                    pckpriority,
                     lblvendorName,
                     entvendorName,
                     lblnotes,
@@ -92,7 +109,6 @@ namespace FITEvents.ItemPages
             spinner.IsRunning = true;
             deliverable.deliverableName = entdeliverableName.Text;
             deliverable.vendorID = entvendorName.Text;
-            deliverable.priority = int.Parse(entpriority.Text);
             deliverable.notes = entnotes.Text;
 
             if (String.IsNullOrEmpty(deliverable.deliverableID))
@@ -150,5 +166,11 @@ namespace FITEvents.ItemPages
             deliverable.teamName = team.teamName;
             btnteam.Text = deliverable.teamName;
         }
+
+        void OnpckPriorityChange(object sender, EventArgs e)
+        {
+            deliverable.priority = (string)pckpriority.SelectedItem;
+        }
+        
     }
 }
