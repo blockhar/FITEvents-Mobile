@@ -14,7 +14,7 @@ namespace FITEvents.ItemPages
         Button btnDeliverables;
         Label lblEventName;
         Label lblPhaseName;
-        Label lblPhaseOrder;
+        //Label lblPhaseOrder;
         Entry entPhaseName;
         //Entry entPhaseOrder;
         Button btnSaveClose;
@@ -35,7 +35,7 @@ namespace FITEvents.ItemPages
             lblEventName = new Label { Text = phase.eventName };
             lblPhaseName = new Label { Text = "Phase Name" };
             entPhaseName = new Entry { Text = phase.phaseName };
-            lblPhaseOrder = new Label { Text = "Phase Order" };
+            //lblPhaseOrder = new Label { Text = "Phase Order" };
             //entPhaseOrder = new Entry { Text = phase.phaseOrder.ToString() };
             btnSaveClose = new Button { Text = "Save and Close" };
             btnSaveClose.Clicked += Save;
@@ -53,7 +53,7 @@ namespace FITEvents.ItemPages
                     lblEventName,
                     lblPhaseName,
                     entPhaseName,
-                    lblPhaseOrder,
+                    //lblPhaseOrder,
                     //entPhaseOrder,
                     btnSaveClose,
                     btnSave,
