@@ -23,6 +23,9 @@ namespace FITEvents
             Resources.Add(FITEventStyles.entryStyle);
             Resources.Add(FITEventStyles.labelStyle);
             Resources.Add(FITEventStyles.pickerStyle);
+            Resources.Add(FITEventStyles.datePickerStyle);
+            Resources.Add(FITEventStyles.timePickerStyle);
+
         }
 
 		protected override void OnStart ()
