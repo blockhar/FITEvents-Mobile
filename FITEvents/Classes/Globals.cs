@@ -69,6 +69,22 @@ namespace FITEvents.Classes
             }
         };
 
-        static public string GlobalBGImageName = "h960w1600.png";
+        static public Style datePickerStyle = new Style(typeof(DatePicker))
+        {
+            Setters =
+            {
+                new Setter {Property = DatePicker.TextColorProperty, Value = Color.White}
+            }
+        };
+
+        static public Style timePickerStyle = new Style(typeof(TimePicker))
+        {
+            Setters =
+            {
+                new Setter {Property = TimePicker.TextColorProperty, Value = Color.White}
+            }
+        };
+
+        static public string GlobalBGImageName = "h960w576.jpg";
     }
 }
