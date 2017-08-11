@@ -79,7 +79,7 @@ namespace FITEvents.HomePages
                 }
             };
 
-            this.BackgroundImage = "backgrounddarkened.png";
+            this.BackgroundImage = "backgrounddarkened.jpg";
         }
 
         async void OnSignupBtnClick(object sender, EventArgs args)
