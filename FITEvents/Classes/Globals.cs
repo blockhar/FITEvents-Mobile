@@ -57,7 +57,7 @@ namespace FITEvents.Classes
         {
             Setters =
             {
-                new Setter {Property = ContentPage.BackgroundImageProperty, Value = "h960w1600.png"}
+                new Setter {Property = ContentPage.BackgroundImageProperty, Value = "h960w576.png"}
             }
         };
 
