@@ -94,8 +94,7 @@ namespace FITEvents.ExecutionPages
                         Spacing = 0,
                         Children =
                         {
-                            dueLabel,
-                            spinner
+                            dueLabel                           
                         }
 
 
@@ -130,7 +129,8 @@ namespace FITEvents.ExecutionPages
                 Children =
                 {
                     header,
-                    listView
+                    listView,
+                    spinner
                 }
             };
 
