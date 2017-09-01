@@ -31,7 +31,7 @@ namespace FITEvents.ExecutionPages
                 this.dueDateGroup = dueDate.Date.AddHours(dueDate.Hour);
                 if (String.IsNullOrEmpty(_task.completedBy))
                 {
-                    bgColor = Color.White;
+                    bgColor = Color.Transparent;
                     status = "Not Completed";
                 }
                 else
