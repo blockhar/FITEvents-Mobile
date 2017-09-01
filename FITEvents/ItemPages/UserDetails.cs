@@ -35,7 +35,7 @@ namespace FITEvents.ItemPages
             entUserName = new Entry { Text = user.userName };
             entUserPhone = new Entry { Text = user.userPhone };
             entUserEmail = new Entry { Text = user.userEmail };
-            entUserEmail.IsEnabled = false;
+            entUserEmail.InputTransparent = true; //prevents user from changing. Using IsEnabled = false causes an error where the text color cannot be changed from the default black
             btnSaveClose = new Button { Text = "Save and Close" };
             btnSaveClose.Clicked += Save;
             btnSaveClose.Clicked += Close;
