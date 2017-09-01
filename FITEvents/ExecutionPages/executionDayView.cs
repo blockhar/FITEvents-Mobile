@@ -138,8 +138,8 @@ namespace FITEvents.ExecutionPages
 
         void OnSelection(object sender, SelectedItemChangedEventArgs e)
         {
-            spinner.IsVisible = true;
-            spinner.IsRunning = true;
+            //spinner.IsVisible = true;
+            //spinner.IsRunning = true;
             if (e.SelectedItem == null)
             {
                 return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
