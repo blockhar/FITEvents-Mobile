@@ -37,6 +37,7 @@ namespace FITEvents.ListPages
                 {
                     Label nameLabel = new Label();
                     nameLabel.SetBinding(Label.TextProperty, "teamName");
+                    nameLabel.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
 
                     return new ViewCell
                     {
@@ -54,6 +55,7 @@ namespace FITEvents.ListPages
             };
 
             listView.ItemSelected += OnSelection;
+            listView.SeparatorColor = Color.White;
 
             Content = new StackLayout
             {

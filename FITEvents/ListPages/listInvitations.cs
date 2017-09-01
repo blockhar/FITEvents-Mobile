@@ -52,6 +52,7 @@ namespace FITEvents.ListPages
             };
 
             listView.ItemSelected += OnSelection;
+            listView.SeparatorColor = Color.White;
 
             Content = new StackLayout
             {

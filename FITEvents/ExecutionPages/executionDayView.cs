@@ -84,6 +84,7 @@ namespace FITEvents.ExecutionPages
                     
                     Label dueLabel = new Label();
                     dueLabel.SetBinding(Label.TextProperty, "dueDateGroup", BindingMode.Default, null, stringFormat: "{0:d}");
+                    dueLabel.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
 
                     StackLayout myView = new StackLayout
                     {
@@ -100,16 +101,15 @@ namespace FITEvents.ExecutionPages
 
                     };
 
-
                     return new ViewCell
                     {
                         View = myView
-
                     };
                 })
             };
 
             listView.ItemSelected += OnSelection;
+            listView.SeparatorColor = Color.White;
 
             // Accomodate iPhone status bar.
             int top;

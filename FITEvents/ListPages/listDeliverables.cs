@@ -61,6 +61,7 @@ namespace FITEvents.ListPages
             };
 
             listView.ItemSelected += OnSelection;
+            listView.SeparatorColor = Color.White;
 
             Content = new StackLayout
             {
@@ -71,6 +72,7 @@ namespace FITEvents.ListPages
                     spinner
                 }
             };
+
         }
 
         void OnSelection(object sender, SelectedItemChangedEventArgs e)

@@ -82,16 +82,39 @@ namespace FITEvents.ExecutionPages
                 group.dueDateGroup = list.First().dueDateGroup;
                 group.AddRange(list);
                 groupedWithTitleProperty.Add(group);
-            }   
+            }
 
-            
+
             ListView listView = new ListView
             {
-                
+
                 ItemsSource = groupedWithTitleProperty,
                 HasUnevenRows = true,
                 IsGroupingEnabled = true,
                 GroupDisplayBinding = new Binding("dueDateGroup", BindingMode.Default, null, stringFormat: "{0:t}"),
+
+                GroupHeaderTemplate = new DataTemplate(() =>
+                {
+                    Label dueDateGroupLabel = new Label();
+                    dueDateGroupLabel.SetBinding(Label.TextProperty, "dueDateGroup", BindingMode.Default, null, stringFormat: "{0:t}");
+
+                    StackLayout myGroupView = new StackLayout
+                    {
+                        Padding = new Thickness(0, 5),
+                        VerticalOptions = LayoutOptions.Center,
+                        HorizontalOptions = LayoutOptions.FillAndExpand,
+                        Spacing = 0,
+                        Children =
+                        {
+                            dueDateGroupLabel
+                        }
+                    };
+
+                    return new ViewCell
+                    {
+                        View = myGroupView
+                    };
+                }),
 
                 ItemTemplate = new DataTemplate(() =>
                 {
@@ -133,6 +156,7 @@ namespace FITEvents.ExecutionPages
                         View = myView  
                                                                                        
                     };
+                                        
                 })
             };
 
