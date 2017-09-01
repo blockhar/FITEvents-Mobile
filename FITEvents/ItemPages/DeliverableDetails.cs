@@ -114,7 +114,7 @@ namespace FITEvents.ItemPages
             if (String.IsNullOrEmpty(deliverable.deliverableID))
             {
                 deliverable = await deliverable.Create();
-                await Navigation.PushModalAsync(new listTasks(deliverable));
+                await Navigation.PushAsync(new listTasks(deliverable));
             }
 
             else
@@ -145,7 +145,7 @@ namespace FITEvents.ItemPages
             spinner.IsVisible = true;
             spinner.IsRunning = true;
             
-            await Navigation.PushModalAsync(new listTasks(deliverable));
+            await Navigation.PushAsync(new listTasks(deliverable));
             spinner.IsVisible = false;
             spinner.IsRunning = false;
         }
@@ -155,7 +155,7 @@ namespace FITEvents.ItemPages
             spinner.IsVisible = true;
             spinner.IsRunning = true;
             List<Team> allTeams = await Team.GetAllTeams(Globals.ActiveEvent.eventID);
-            await Navigation.PushModalAsync(new ModalTeam(this, allTeams));
+            await Navigation.PushAsync(new ModalTeam(this, allTeams));
             spinner.IsVisible = false;
             spinner.IsRunning = false;
         }

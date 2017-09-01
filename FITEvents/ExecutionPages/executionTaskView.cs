@@ -31,7 +31,7 @@ namespace FITEvents.ExecutionPages
                 this.dueDateGroup = dueDate.Date.AddHours(dueDate.Hour);
                 if (String.IsNullOrEmpty(_task.completedBy))
                 {
-                    bgColor = Color.White;
+                    bgColor = Color.Transparent;
                     status = "Not Completed";
                 }
                 else
@@ -136,6 +136,33 @@ namespace FITEvents.ExecutionPages
                 })
             };
 
+            listView.GroupHeaderTemplate = new DataTemplate(() =>
+            {
+                Label nameLabel = new Label();
+                nameLabel.SetBinding(Label.TextProperty, "dueDateGroup", BindingMode.Default, null, stringFormat: "{0:t}");
+
+                StackLayout myView = new StackLayout
+                {
+
+                    Padding = new Thickness(0, 5),
+                    VerticalOptions = LayoutOptions.Center,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    Spacing = 0,
+                    Children =
+                        {
+                            nameLabel
+                        }
+                };
+
+                return new ViewCell
+                {
+                    View = myView
+
+                };
+            });
+
+            listView.ItemSelected += OnSelection;
+
             // Accomodate iPhone status bar.
             int top;
             switch (Device.RuntimePlatform)
@@ -158,6 +185,22 @@ namespace FITEvents.ExecutionPages
                 }
             };
 
+        }
+
+        void OnSelection(object sender, SelectedItemChangedEventArgs e)
+        {
+            //spinner.IsVisible = true;
+            //spinner.IsRunning = true;
+            if (e.SelectedItem == null)
+            {
+                return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
+            }
+
+            TaskCell cell = (TaskCell)e.SelectedItem;
+            Navigation.PushAsync(new TaskDetails(cell.task, ""));
+            //spinner.IsVisible = false;
+            //spinner.IsRunning = false;
+            ((ListView)sender).SelectedItem = null;
         }
     }
 }

@@ -83,7 +83,7 @@ namespace FITEvents.ListPages
 
             Event selectedEvent = (Event)e.SelectedItem;
             Globals.ActiveEvent = selectedEvent;
-            Navigation.PushModalAsync(new EventHome(selectedEvent));
+            Navigation.PushAsync(new EventHome(selectedEvent));
 
             ((ListView)sender).SelectedItem = null;
             spinner.IsRunning = false;
@@ -93,7 +93,7 @@ namespace FITEvents.ListPages
         void OnbtnNewEventClick(object sender, EventArgs e)
         {
             Event newEvent = new Event();
-            Navigation.PushModalAsync(new EventDetails(newEvent));
+            Navigation.PushAsync(new EventDetails(newEvent));
         }
 
         async override protected void OnAppearing()

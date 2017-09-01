@@ -89,7 +89,7 @@ namespace FITEvents.ModalPages
             Team newTeam = new Team();
             newTeam.eventID = Globals.ActiveEvent.eventID;
             newTeam.eventName = Globals.ActiveEvent.eventName;
-            Navigation.PushModalAsync(new TeamDetails(newTeam)); ;
+            Navigation.PushAsync(new TeamDetails(newTeam)); ;
             spinner.IsRunning = false;
             spinner.IsVisible = false;
         }

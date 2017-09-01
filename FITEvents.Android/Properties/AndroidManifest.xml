@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" android:versionName="0.0.5" android:versionCode="5" package="FITEvents.FITEvents">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" android:versionName="0.0.6" package="FITEvents.FITEvents" android:versionCode="6">
 	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="25" />
-	<application android:label="FITEvents.Android" android:icon="@drawable/Icon"></application>
+	<application android:label="FITEvents" android:icon="@drawable/Icon"></application>
 </manifest>

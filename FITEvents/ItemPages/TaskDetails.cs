@@ -92,8 +92,17 @@ namespace FITEvents.ItemPages
         {
             spinner.IsVisible = true;
             spinner.IsRunning = true;
-            List<TeamMember> allTeamMembers = await TeamMember.GetAllTeamMembers(teamID);
-            await Navigation.PushModalAsync(new ModalTeamMember(this, allTeamMembers, "completedBy"));
+            List<TeamMember> allTeamMembers = new List<TeamMember>();
+            if (!String.IsNullOrEmpty(teamID))
+            {
+                allTeamMembers = await TeamMember.GetAllTeamMembers(teamID);
+            }
+            else
+            {
+                allTeamMembers = await TeamMember.GetAllEventTeamMembers(Globals.ActiveEvent.eventID);
+            }
+            
+            await Navigation.PushAsync(new ModalTeamMember(this, allTeamMembers, "completedBy"));
             spinner.IsVisible = false;
             spinner.IsRunning = false;
         }
@@ -103,7 +112,7 @@ namespace FITEvents.ItemPages
             spinner.IsVisible = true;
             spinner.IsRunning = true;
             List<TeamMember> allTeamMembers = await TeamMember.GetAllTeamMembers(teamID);
-            await Navigation.PushModalAsync(new ModalTeamMember(this, allTeamMembers, "assignedTo"));
+            await Navigation.PushAsync(new ModalTeamMember(this, allTeamMembers, "assignedTo"));
             spinner.IsVisible = false;
             spinner.IsRunning = false;
         }
@@ -113,7 +122,7 @@ namespace FITEvents.ItemPages
             spinner.IsVisible = true;
             spinner.IsRunning = true;
             task.taskName = enttaskName.Text;
-            task.dueDate = DateTime.Parse(entdueDate.Date.ToShortDateString() + " " + entdueTime.Time.ToString());
+            task.dueDate = DateTime.Parse(entdueDate.Date.ToShortDateString() + " " + entdueTime.Time.ToString()).ToUniversalTime();
             task.notes = entnotes.Text;
             if (String.IsNullOrEmpty(task.taskID))
             {

@@ -75,7 +75,7 @@ namespace FITEvents.ListPages
             spinner.IsRunning = true;
             spinner.IsVisible = true;
             Team selectedTeam = (Team)e.SelectedItem;
-            Navigation.PushModalAsync(new TeamDetails(selectedTeam));
+            Navigation.PushAsync(new TeamDetails(selectedTeam));
             ((ListView)sender).SelectedItem = null;
             spinner.IsRunning = false;
             spinner.IsVisible = false;
@@ -89,7 +89,7 @@ namespace FITEvents.ListPages
             Team newTeam = new Team();
             newTeam.eventID = myEvent.eventID;
             newTeam.eventName = myEvent.eventName;
-            Navigation.PushModalAsync(new TeamDetails(newTeam));
+            Navigation.PushAsync(new TeamDetails(newTeam));
             spinner.IsRunning = false;
             spinner.IsVisible = false;
         }

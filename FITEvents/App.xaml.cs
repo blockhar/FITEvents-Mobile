@@ -11,12 +11,14 @@ namespace FITEvents
 {
 	public partial class App : Application
 	{
-		public App ()
+        public static NavigationPage NavigationPage { get; private set; }
+
+        public App ()
 		{
 			InitializeComponent();
 
-            //MainPage = new NavigationPage(new Login());
-            MainPage = new Login();
+            MainPage = new NavigationPage(new Login());
+            //MainPage = new Login();
 
             Resources = new ResourceDictionary();
             Resources.Add(FITEventStyles.buttonStyle);

@@ -94,7 +94,7 @@ namespace FITEvents.ListPages
             spinner.IsRunning = true;
             spinner.IsVisible = true;
             List<TeamMember> allTeamMembers = await TeamMember.GetAllEventTeamMembers(Globals.ActiveEvent.eventID);
-            await Navigation.PushModalAsync(new ModalEventMembers(allTeamMembers, team));
+            await Navigation.PushAsync(new ModalEventMembers(allTeamMembers, team));
             spinner.IsRunning = false;
             spinner.IsVisible = false;
         }

@@ -72,7 +72,7 @@ namespace FITEvents.ListPages
             spinner.IsRunning = true;
             spinner.IsVisible = true;
             TeamInvitation selectedInvite = (TeamInvitation)e.SelectedItem;
-            Navigation.PushModalAsync(new InvitationDetails(selectedInvite));
+            Navigation.PushAsync(new InvitationDetails(selectedInvite));
             ((ListView)sender).SelectedItem = null;
             spinner.IsRunning = false;
             spinner.IsVisible = false;

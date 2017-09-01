@@ -75,7 +75,7 @@ namespace FITEvents.ListPages
             spinner.IsRunning = true;
             spinner.IsVisible = true;
             Phase selectedPhase = (Phase)e.SelectedItem;
-            Navigation.PushModalAsync(new PhaseDetails(selectedPhase));
+            Navigation.PushAsync(new PhaseDetails(selectedPhase));
             ((ListView)sender).SelectedItem = null;
             spinner.IsRunning = false;
             spinner.IsVisible = false;
@@ -88,7 +88,7 @@ namespace FITEvents.ListPages
             Phase newPhase = new Phase();
             newPhase.eventID = myEvent.eventID;
             newPhase.eventName = myEvent.eventName;
-            Navigation.PushModalAsync(new PhaseDetails(newPhase));
+            Navigation.PushAsync(new PhaseDetails(newPhase));
             spinner.IsRunning = false;
             spinner.IsVisible = false;
         }

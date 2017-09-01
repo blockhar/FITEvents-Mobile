@@ -85,7 +85,7 @@ namespace FITEvents.ItemPages
             {
                 Log.Info("FITEVENTS","Creating Event");
                 myEvent = await myEvent.Create();
-                await Navigation.PushModalAsync(new listPhases(myEvent));
+                await Navigation.PushAsync(new listPhases(myEvent));
             }
             else
             {
@@ -116,7 +116,7 @@ namespace FITEvents.ItemPages
             spinner.IsVisible = true;
             spinner.IsRunning = true;
             
-            await Navigation.PushModalAsync(new listPhases(myEvent));
+            await Navigation.PushAsync(new listPhases(myEvent));
             spinner.IsVisible = false;
             spinner.IsRunning = false;
         }

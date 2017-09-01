@@ -125,7 +125,7 @@ namespace FITEvents.ModalPages
         void OnbtnNewTeamMemberClick(object sender, EventArgs e)
         {
             TeamMember newTeamMember = new TeamMember();
-            //Navigation.PushModalAsync(new TeamMemberDetails(newTeamMember));
+            //Navigation.PushAsync(new TeamMemberDetails(newTeamMember));
         }
     }
 }

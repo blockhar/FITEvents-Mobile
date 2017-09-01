@@ -84,7 +84,7 @@ namespace FITEvents.ListPages
             spinner.IsVisible = true;
 
             Deliverable selectedDeliverable = (Deliverable)e.SelectedItem;
-            Navigation.PushModalAsync(new DeliverableDetails(selectedDeliverable));
+            Navigation.PushAsync(new DeliverableDetails(selectedDeliverable));
             ((ListView)sender).SelectedItem = null;
             spinner.IsRunning = false;
             spinner.IsVisible = false;
@@ -98,7 +98,7 @@ namespace FITEvents.ListPages
             Deliverable newDeliverable = new Deliverable();
             newDeliverable.phaseID = phase.phaseID;
             newDeliverable.phaseName = phase.phaseName;
-            Navigation.PushModalAsync(new DeliverableDetails(newDeliverable));
+            Navigation.PushAsync(new DeliverableDetails(newDeliverable));
             spinner.IsRunning = false;
             spinner.IsVisible = false;
         }

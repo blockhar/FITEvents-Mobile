@@ -81,7 +81,7 @@ namespace FITEvents.ListPages
             spinner.IsRunning = true;
             spinner.IsVisible = true;
             Task selectedTask = (Task)e.SelectedItem;
-            await Navigation.PushModalAsync(new TaskDetails(selectedTask, deliverable.team));
+            await Navigation.PushAsync(new TaskDetails(selectedTask, deliverable.team));
 
             ((ListView)sender).SelectedItem = null; 
             spinner.IsRunning = false;
@@ -95,7 +95,7 @@ namespace FITEvents.ListPages
             Task newtask = new Task();
             newtask.deliverableID = deliverable.deliverableID;
             newtask.deliverableName = deliverable.deliverableName;
-            await Navigation.PushModalAsync(new TaskDetails(newtask, deliverable.team));
+            await Navigation.PushAsync(new TaskDetails(newtask, deliverable.team));
             spinner.IsRunning = false;
             spinner.IsVisible = false;
         }

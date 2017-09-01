@@ -54,17 +54,23 @@ namespace FITEvents.HomePages
                 }
             };
 
+            this.ToolbarItems.Add(new ToolbarItem("", "menu.png", OnMenuButton, ToolbarItemOrder.Primary));
             
+        }
+
+        void OnMenuButton()
+        {
+            DisplayAlert("Test", "Thanks for pressing the menu button", "Ok");
         }
 
         void OnProfileBtnClick(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new UserDetails(Globals.loggedInUser));
+            Navigation.PushAsync(new UserDetails(Globals.loggedInUser));
         }
 
         async void OnEventsBtnClick(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new listEvents());
+            await Navigation.PushAsync(new listEvents());
         }
 
         
@@ -72,7 +78,7 @@ namespace FITEvents.HomePages
         {
             spinner.IsRunning = true;
             spinner.IsVisible = true;
-            await Navigation.PushModalAsync(new listInvitations());
+            await Navigation.PushAsync(new listInvitations());
             spinner.IsRunning = false;
             spinner.IsVisible = false;
 

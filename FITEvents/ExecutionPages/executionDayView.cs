@@ -138,8 +138,8 @@ namespace FITEvents.ExecutionPages
 
         void OnSelection(object sender, SelectedItemChangedEventArgs e)
         {
-            spinner.IsVisible = true;
-            spinner.IsRunning = true;
+            //spinner.IsVisible = true;
+            //spinner.IsRunning = true;
             if (e.SelectedItem == null)
             {
                 return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
@@ -151,9 +151,9 @@ namespace FITEvents.ExecutionPages
             {
                 taskList.Add(taskCell.task);
             }
-            Navigation.PushModalAsync(new executionTaskView(taskList));
-            spinner.IsVisible = false;
-            spinner.IsRunning = false;
+            Navigation.PushAsync(new executionTaskView(taskList));
+            //spinner.IsVisible = false;
+            //spinner.IsRunning = false;
             ((ListView)sender).SelectedItem = null; 
         }
     }

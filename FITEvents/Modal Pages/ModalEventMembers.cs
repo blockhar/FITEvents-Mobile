@@ -97,7 +97,7 @@ namespace FITEvents.ModalPages
             spinner.IsVisible = true;
             TeamInvitation invite = new TeamInvitation();
             invite.teamID = team.teamID;
-            Navigation.PushModalAsync(new InvitationDetails(invite));
+            Navigation.PushAsync(new InvitationDetails(invite));
             spinner.IsRunning = false;
             spinner.IsVisible = false;
         }

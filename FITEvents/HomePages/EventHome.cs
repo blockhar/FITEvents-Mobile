@@ -58,19 +58,19 @@ namespace FITEvents.HomePages
             spinner.IsVisible = true;
             spinner.IsRunning = true;
             Cache.taskList = await Task.GetAllEventTasks(Globals.ActiveEvent.eventID);
-            await Navigation.PushModalAsync(new executionDayView());
+            await Navigation.PushAsync(new executionDayView());
             spinner.IsVisible = false;
             spinner.IsRunning = false;
         }
 
         async void OnEventManagementBtnClick(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new EventDetails(activeEvent));
+            await Navigation.PushAsync(new EventDetails(activeEvent));
         }
 
         async void onTeamManagementBtnClick(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new listTeams(activeEvent));
+            await Navigation.PushAsync(new listTeams(activeEvent));
         }
     }
 }

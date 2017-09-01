@@ -13,6 +13,7 @@ using FITEvents.ListPages;
 using FITEvents.ExecutionPages;
 using Android.Util;
 using System.Threading;
+using FITEvents;
 
 namespace FITEvents.HomePages
 {
@@ -80,6 +81,7 @@ namespace FITEvents.HomePages
             };
 
             this.BackgroundImage = "backgrounddarkened.jpg";
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         async void OnSignupBtnClick(object sender, EventArgs args)
@@ -110,7 +112,7 @@ namespace FITEvents.HomePages
                     await user.Create();
                     Log.Info("FITEVENTS", "User Created");
                     Globals.loggedInUser = await User.GetLoggedInUser();
-                    await Navigation.PushModalAsync(new Home());
+                    await Navigation.PushAsync(new Home());
                 }
                 catch
                 {
@@ -135,7 +137,7 @@ namespace FITEvents.HomePages
             spinner.IsRunning = true;
             await TryLogin();
             Globals.loggedInUser = await User.GetLoggedInUser();
-            await Navigation.PushModalAsync(new Home());
+            await Navigation.PushAsync(new Home());
             spinner.IsVisible = false;
             spinner.IsRunning = false;
         }

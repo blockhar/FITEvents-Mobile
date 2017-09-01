@@ -17,8 +17,9 @@ namespace FITEvents.Classes
         static public string BearerCode;
 
         static public User loggedInUser;
+
     }
-    
+
     static class Cache
     {
         static public List<Task> taskList;
@@ -49,7 +50,7 @@ namespace FITEvents.Classes
         {
             Setters =
             {
-                new Setter {Property = Label.TextColorProperty, Value = Color.FromRgb(241,184,45)}
+                new Setter {Property = Label.TextColorProperty, Value = Color.FromRgb(241,184,45)} //#f1b82d
             }
         };
 
@@ -57,7 +58,7 @@ namespace FITEvents.Classes
         {
             Setters =
             {
-                new Setter {Property = ContentPage.BackgroundImageProperty, Value = "h960w1600.png"}
+                new Setter {Property = ContentPage.BackgroundImageProperty, Value = "h960w576.jpg"}
             }
         };
 
